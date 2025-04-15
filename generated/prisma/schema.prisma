@@ -1,0 +1,108 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+model User {
+  id               String   @id @default(cuid())
+  last_name        String
+  first_name       String
+  company_number   String
+  email            String   @unique
+  password         String
+  date_inscription DateTime @default(now())
+  date_update      DateTime @updatedAt
+
+  modules     Module[]
+  bills       Bill[]
+  userClients UserClient[]
+  // emailVerified Boolean? @default(false)
+  // image         String?
+  // createdAt     DateTime?
+  // updatedAt     DateTime?
+
+  @@map("user")
+}
+
+model Client {
+  client_id     String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  address       String
+  status        String
+  date_creation DateTime  @default(now())
+  date_update   DateTime? @updatedAt
+
+  ICALs       ICAL[]
+  bills       Bill[]
+  userClients UserClient[]
+}
+
+model ICAL {
+  ical_id    String   @id @default(cuid())
+  url        String   @unique
+  date_start DateTime
+  date_end   DateTime
+
+  client    Client @relation(fields: [client_id], references: [client_id])
+  client_id String
+
+  icalModules ICALModule[]
+}
+
+model Module {
+  module_id  String @id @default(cuid())
+  name       String
+  unit_price Int
+  duration   String
+
+  user User   @relation(fields: [id], references: [id])
+  id   String
+
+  icalModules ICALModule[]
+}
+
+model Bill {
+  bill_id       String    @id @default(cuid())
+  date_creation DateTime  @default(now())
+  date_update   DateTime? @updatedAt
+  date_echeance DateTime
+  tva           Int?
+  status        String
+
+  client    Client @relation(fields: [client_id], references: [client_id])
+  client_id String
+
+  user User   @relation(fields: [id], references: [id])
+  id   String
+}
+
+model UserClient {
+  id        String
+  client_id String
+
+  user   User   @relation(fields: [id], references: [id])
+  client Client @relation(fields: [client_id], references: [client_id])
+
+  @@id([id, client_id])
+}
+
+model ICALModule {
+  ical_id   String
+  module_id String
+
+  ical   ICAL   @relation(fields: [ical_id], references: [ical_id])
+  module Module @relation(fields: [module_id], references: [module_id])
+
+  @@id([ical_id, module_id])
+}

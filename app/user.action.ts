@@ -25,7 +25,7 @@ export const createUserAction = async (user: {
                 }
             })
 
-            redirect(`/user/${newUser.user_id}`);
+            redirect(`/user/${newUser.id}`);
         } else {
             return {
                 error: "Your confirmation of password is not the same with the specified password."
@@ -38,10 +38,10 @@ export const createUserAction = async (user: {
     }
 }
 
-export async function deleteUserAction(user_id: string) {
+export async function deleteUserAction(id: string) {
     await prisma.user.delete({
         where: {
-            user_id,
+            id,
         },
     });
 

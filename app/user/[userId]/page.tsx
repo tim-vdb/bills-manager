@@ -1,4 +1,4 @@
-
+"use client"
 import { deleteUserAction } from '@/app/user.action';
 import { Button } from '@/src/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/src/components/ui/card';
@@ -17,12 +17,12 @@ export default async function Page(props: {
 
     const user = await prisma.user.findFirst({
         where: {
-            user_id: userId,
+            id: userId,
         }
     })
 
     const onDelete = async () => {
-        await deleteUserAction(user?.user_id);
+        await deleteUserAction(user?.id);
 
         // if (result.message) {
         //     router.refresh();
