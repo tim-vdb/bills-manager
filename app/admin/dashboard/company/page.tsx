@@ -18,7 +18,7 @@ export default function RegisterPage() {
         e.preventDefault()
         const res = await fetch("/api/company", {
             method: "POST",
-            body: JSON.stringify({ name, email, address, status }),
+            body: JSON.stringify({ "name": name, "email": email, "address": address, "status": status }),
         })
 
         if (res.ok) {

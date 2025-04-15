@@ -7,6 +7,7 @@ const prisma = new PrismaClient()
 export async function POST(req: Request) {
   try {
     const { name, email, address, status } = await req.json()
+    console.log("REÇU DU FRONT:", { name, email, address, status })
 
     const existingClient = await prisma.client.findUnique({ where: { email } })
 
@@ -15,7 +16,7 @@ export async function POST(req: Request) {
     }
 
     const client = await prisma.client.create({
-      data: { name, email, address, status },
+      data: {"name": name, "email": email, "address": address, "status": status },
     })
 
     return NextResponse.json(client)
