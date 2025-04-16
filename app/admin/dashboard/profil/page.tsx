@@ -1,16 +1,17 @@
-// app/profil/page.tsx
 'use client'
-
+import * as React from "react"
 import { Button } from "@/src/components/ui/button"
 import { useSession, signOut } from "next-auth/react"
 import { useRouter } from "next/navigation"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { Card } from "@/src/components/ui/card"
 import Link from "next/link"
+import { DatePickerWithRange } from "@/src/components/date-range-picker"
 
 export default function ProfilPage() {
   const { data: session, status } = useSession()
   const router = useRouter()
+  const [clients, setClients] = useState<any[]>([])
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -18,31 +19,32 @@ export default function ProfilPage() {
     }
   }, [status, router])
 
-  if (status === "loading") return <p>Chargement de la session...</p>
-  if (!session) {
-    router.push("/login")
-    return null
-  }
+  useEffect(() => {
+    // Appel API pour récupérer les clients
+    const fetchClients = async () => {
+      try {
+        const res = await fetch("/api/company/list") // tu dois créer cette API côté server
+        const data = await res.json()
+        if (res.ok) {
+          setClients(data)
+        } else {
+          console.error("Erreur récupération clients:", data.error)
+        }
+      } catch (err) {
+        console.error("Erreur fetch clients:", err)
+      }
+    }
+
+    if (status === "authenticated") {
+      fetchClients()
+    }
+  }, [status])
+
+  if (!session) return null
 
   return (
-    // <div className="p-6 max-w-xl mx-auto">
-
-    //   <Card className="p-6 shadow-lg rounded-md bg-white space-y-4">
-    //     <h1 className="text-3xl font-bold text-center mb-4">Bienvenue {session?.user?.name ?? "Utilisateur"}</h1>
-
-
-    //     <div className="space-y-2">
-    //       <div className="flex justify-between">
-    //         <span className="font-semibold text-lg">Email :</span>
-    //         <span>{session?.user?.email}</span>
-    //       </div>
-    //       <div className="flex justify-between">
-    //         <span className="font-semibold text-lg">ID :</span>
-    //         <span>{session?.user?.id}</span>
-    //       </div>
-    //     </div>
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      {/* User Information Section */}
+      {/* Infos utilisateur */}
       <Card className="p-4 shadow-md rounded-md bg-gray-50">
         <h2 className="text-xl font-semibold mb-4">Informations utilisateur</h2>
         <div className="space-y-2">
@@ -61,7 +63,7 @@ export default function ProfilPage() {
         </div>
       </Card>
 
-      {/* Clients Section */}
+      {/* Section clients */}
       <Card className="p-4 shadow-md rounded-md bg-gray-50">
         <h2 className="text-xl font-semibold mb-4">Clients</h2>
         <div className="space-y-2">
@@ -73,9 +75,22 @@ export default function ProfilPage() {
           </Button>
         </div>
       </Card>
-      {/* </div> */}
 
-      <div className="mt-6 text-center">
+      <DatePickerWithRange clients={clients} />
+
+      {/* Liste des clients */}
+      {clients.map((client) => (
+        <Card key={client.client_id} className="p-4">
+          <p className="font-semibold">{client.name}</p>
+          <p>{client.email}</p>
+          <input type="text" />
+          <Button type="submit" variant="default" className="w-full py-3 text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-300 rounded-lg">
+            Generate Bill
+          </Button>
+        </Card>
+      ))}
+
+      <div className="mt-6 text-center col-span-full">
         <Button
           variant="destructive"
           onClick={() => signOut({ callbackUrl: "/admin/auth/login" })}
@@ -84,7 +99,6 @@ export default function ProfilPage() {
           Se déconnecter
         </Button>
       </div>
-      {/* // </Card> */}
-    </div >
+    </div>
   )
 }

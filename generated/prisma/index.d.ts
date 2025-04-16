@@ -2743,8 +2743,20 @@ export namespace Prisma {
 
   export type AggregateClient = {
     _count: ClientCountAggregateOutputType | null
+    _avg: ClientAvgAggregateOutputType | null
+    _sum: ClientSumAggregateOutputType | null
     _min: ClientMinAggregateOutputType | null
     _max: ClientMaxAggregateOutputType | null
+  }
+
+  export type ClientAvgAggregateOutputType = {
+    hourly_rate: number | null
+    tva_rate: number | null
+  }
+
+  export type ClientSumAggregateOutputType = {
+    hourly_rate: number | null
+    tva_rate: number | null
   }
 
   export type ClientMinAggregateOutputType = {
@@ -2753,6 +2765,9 @@ export namespace Prisma {
     email: string | null
     address: string | null
     status: string | null
+    hourly_rate: number | null
+    tva_rate: number | null
+    url_ICAL: string | null
     date_creation: Date | null
     date_update: Date | null
   }
@@ -2763,6 +2778,9 @@ export namespace Prisma {
     email: string | null
     address: string | null
     status: string | null
+    hourly_rate: number | null
+    tva_rate: number | null
+    url_ICAL: string | null
     date_creation: Date | null
     date_update: Date | null
   }
@@ -2773,11 +2791,24 @@ export namespace Prisma {
     email: number
     address: number
     status: number
+    hourly_rate: number
+    tva_rate: number
+    url_ICAL: number
     date_creation: number
     date_update: number
     _all: number
   }
 
+
+  export type ClientAvgAggregateInputType = {
+    hourly_rate?: true
+    tva_rate?: true
+  }
+
+  export type ClientSumAggregateInputType = {
+    hourly_rate?: true
+    tva_rate?: true
+  }
 
   export type ClientMinAggregateInputType = {
     client_id?: true
@@ -2785,6 +2816,9 @@ export namespace Prisma {
     email?: true
     address?: true
     status?: true
+    hourly_rate?: true
+    tva_rate?: true
+    url_ICAL?: true
     date_creation?: true
     date_update?: true
   }
@@ -2795,6 +2829,9 @@ export namespace Prisma {
     email?: true
     address?: true
     status?: true
+    hourly_rate?: true
+    tva_rate?: true
+    url_ICAL?: true
     date_creation?: true
     date_update?: true
   }
@@ -2805,6 +2842,9 @@ export namespace Prisma {
     email?: true
     address?: true
     status?: true
+    hourly_rate?: true
+    tva_rate?: true
+    url_ICAL?: true
     date_creation?: true
     date_update?: true
     _all?: true
@@ -2848,6 +2888,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: ClientAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ClientSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: ClientMinAggregateInputType
@@ -2878,6 +2930,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: ClientCountAggregateInputType | true
+    _avg?: ClientAvgAggregateInputType
+    _sum?: ClientSumAggregateInputType
     _min?: ClientMinAggregateInputType
     _max?: ClientMaxAggregateInputType
   }
@@ -2888,9 +2942,14 @@ export namespace Prisma {
     email: string
     address: string
     status: string
+    hourly_rate: number
+    tva_rate: number
+    url_ICAL: string
     date_creation: Date
     date_update: Date | null
     _count: ClientCountAggregateOutputType | null
+    _avg: ClientAvgAggregateOutputType | null
+    _sum: ClientSumAggregateOutputType | null
     _min: ClientMinAggregateOutputType | null
     _max: ClientMaxAggregateOutputType | null
   }
@@ -2915,6 +2974,9 @@ export namespace Prisma {
     email?: boolean
     address?: boolean
     status?: boolean
+    hourly_rate?: boolean
+    tva_rate?: boolean
+    url_ICAL?: boolean
     date_creation?: boolean
     date_update?: boolean
     ICALs?: boolean | Client$ICALsArgs<ExtArgs>
@@ -2929,6 +2991,9 @@ export namespace Prisma {
     email?: boolean
     address?: boolean
     status?: boolean
+    hourly_rate?: boolean
+    tva_rate?: boolean
+    url_ICAL?: boolean
     date_creation?: boolean
     date_update?: boolean
   }, ExtArgs["result"]["client"]>
@@ -2939,6 +3004,9 @@ export namespace Prisma {
     email?: boolean
     address?: boolean
     status?: boolean
+    hourly_rate?: boolean
+    tva_rate?: boolean
+    url_ICAL?: boolean
     date_creation?: boolean
     date_update?: boolean
   }, ExtArgs["result"]["client"]>
@@ -2949,11 +3017,14 @@ export namespace Prisma {
     email?: boolean
     address?: boolean
     status?: boolean
+    hourly_rate?: boolean
+    tva_rate?: boolean
+    url_ICAL?: boolean
     date_creation?: boolean
     date_update?: boolean
   }
 
-  export type ClientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"client_id" | "name" | "email" | "address" | "status" | "date_creation" | "date_update", ExtArgs["result"]["client"]>
+  export type ClientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"client_id" | "name" | "email" | "address" | "status" | "hourly_rate" | "tva_rate" | "url_ICAL" | "date_creation" | "date_update", ExtArgs["result"]["client"]>
   export type ClientInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ICALs?: boolean | Client$ICALsArgs<ExtArgs>
     bills?: boolean | Client$billsArgs<ExtArgs>
@@ -2976,6 +3047,9 @@ export namespace Prisma {
       email: string
       address: string
       status: string
+      hourly_rate: number
+      tva_rate: number
+      url_ICAL: string
       date_creation: Date
       date_update: Date | null
     }, ExtArgs["result"]["client"]>
@@ -3409,6 +3483,9 @@ export namespace Prisma {
     readonly email: FieldRef<"Client", 'String'>
     readonly address: FieldRef<"Client", 'String'>
     readonly status: FieldRef<"Client", 'String'>
+    readonly hourly_rate: FieldRef<"Client", 'Float'>
+    readonly tva_rate: FieldRef<"Client", 'Float'>
+    readonly url_ICAL: FieldRef<"Client", 'String'>
     readonly date_creation: FieldRef<"Client", 'DateTime'>
     readonly date_update: FieldRef<"Client", 'DateTime'>
   }
@@ -4023,8 +4100,8 @@ export namespace Prisma {
   export type ICALGroupByOutputType = {
     ical_id: string
     url: string
-    date_start: Date
-    date_end: Date
+    date_start: Date | null
+    date_end: Date | null
     client_id: string
     _count: ICALCountAggregateOutputType | null
     _min: ICALMinAggregateOutputType | null
@@ -4104,8 +4181,8 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       ical_id: string
       url: string
-      date_start: Date
-      date_end: Date
+      date_start: Date | null
+      date_end: Date | null
       client_id: string
     }, ExtArgs["result"]["iCAL"]>
     composites: {}
@@ -9311,6 +9388,9 @@ export namespace Prisma {
     email: 'email',
     address: 'address',
     status: 'status',
+    hourly_rate: 'hourly_rate',
+    tva_rate: 'tva_rate',
+    url_ICAL: 'url_ICAL',
     date_creation: 'date_creation',
     date_update: 'date_update'
   };
@@ -9406,16 +9486,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Int'
+   * Reference to a field of type 'Float'
    */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
     
 
 
   /**
-   * Reference to a field of type 'Float'
+   * Reference to a field of type 'Int'
    */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
     
   /**
    * Deep Input Types
@@ -9507,6 +9587,9 @@ export namespace Prisma {
     email?: StringFilter<"Client"> | string
     address?: StringFilter<"Client"> | string
     status?: StringFilter<"Client"> | string
+    hourly_rate?: FloatFilter<"Client"> | number
+    tva_rate?: FloatFilter<"Client"> | number
+    url_ICAL?: StringFilter<"Client"> | string
     date_creation?: DateTimeFilter<"Client"> | Date | string
     date_update?: DateTimeNullableFilter<"Client"> | Date | string | null
     ICALs?: ICALListRelationFilter
@@ -9520,6 +9603,9 @@ export namespace Prisma {
     email?: SortOrder
     address?: SortOrder
     status?: SortOrder
+    hourly_rate?: SortOrder
+    tva_rate?: SortOrder
+    url_ICAL?: SortOrder
     date_creation?: SortOrder
     date_update?: SortOrderInput | SortOrder
     ICALs?: ICALOrderByRelationAggregateInput
@@ -9536,6 +9622,9 @@ export namespace Prisma {
     name?: StringFilter<"Client"> | string
     address?: StringFilter<"Client"> | string
     status?: StringFilter<"Client"> | string
+    hourly_rate?: FloatFilter<"Client"> | number
+    tva_rate?: FloatFilter<"Client"> | number
+    url_ICAL?: StringFilter<"Client"> | string
     date_creation?: DateTimeFilter<"Client"> | Date | string
     date_update?: DateTimeNullableFilter<"Client"> | Date | string | null
     ICALs?: ICALListRelationFilter
@@ -9549,11 +9638,16 @@ export namespace Prisma {
     email?: SortOrder
     address?: SortOrder
     status?: SortOrder
+    hourly_rate?: SortOrder
+    tva_rate?: SortOrder
+    url_ICAL?: SortOrder
     date_creation?: SortOrder
     date_update?: SortOrderInput | SortOrder
     _count?: ClientCountOrderByAggregateInput
+    _avg?: ClientAvgOrderByAggregateInput
     _max?: ClientMaxOrderByAggregateInput
     _min?: ClientMinOrderByAggregateInput
+    _sum?: ClientSumOrderByAggregateInput
   }
 
   export type ClientScalarWhereWithAggregatesInput = {
@@ -9565,6 +9659,9 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter<"Client"> | string
     address?: StringWithAggregatesFilter<"Client"> | string
     status?: StringWithAggregatesFilter<"Client"> | string
+    hourly_rate?: FloatWithAggregatesFilter<"Client"> | number
+    tva_rate?: FloatWithAggregatesFilter<"Client"> | number
+    url_ICAL?: StringWithAggregatesFilter<"Client"> | string
     date_creation?: DateTimeWithAggregatesFilter<"Client"> | Date | string
     date_update?: DateTimeNullableWithAggregatesFilter<"Client"> | Date | string | null
   }
@@ -9575,8 +9672,8 @@ export namespace Prisma {
     NOT?: ICALWhereInput | ICALWhereInput[]
     ical_id?: StringFilter<"ICAL"> | string
     url?: StringFilter<"ICAL"> | string
-    date_start?: DateTimeFilter<"ICAL"> | Date | string
-    date_end?: DateTimeFilter<"ICAL"> | Date | string
+    date_start?: DateTimeNullableFilter<"ICAL"> | Date | string | null
+    date_end?: DateTimeNullableFilter<"ICAL"> | Date | string | null
     client_id?: StringFilter<"ICAL"> | string
     client?: XOR<ClientScalarRelationFilter, ClientWhereInput>
     icalModules?: ICALModuleListRelationFilter
@@ -9585,8 +9682,8 @@ export namespace Prisma {
   export type ICALOrderByWithRelationInput = {
     ical_id?: SortOrder
     url?: SortOrder
-    date_start?: SortOrder
-    date_end?: SortOrder
+    date_start?: SortOrderInput | SortOrder
+    date_end?: SortOrderInput | SortOrder
     client_id?: SortOrder
     client?: ClientOrderByWithRelationInput
     icalModules?: ICALModuleOrderByRelationAggregateInput
@@ -9594,22 +9691,22 @@ export namespace Prisma {
 
   export type ICALWhereUniqueInput = Prisma.AtLeast<{
     ical_id?: string
-    url?: string
     AND?: ICALWhereInput | ICALWhereInput[]
     OR?: ICALWhereInput[]
     NOT?: ICALWhereInput | ICALWhereInput[]
-    date_start?: DateTimeFilter<"ICAL"> | Date | string
-    date_end?: DateTimeFilter<"ICAL"> | Date | string
+    url?: StringFilter<"ICAL"> | string
+    date_start?: DateTimeNullableFilter<"ICAL"> | Date | string | null
+    date_end?: DateTimeNullableFilter<"ICAL"> | Date | string | null
     client_id?: StringFilter<"ICAL"> | string
     client?: XOR<ClientScalarRelationFilter, ClientWhereInput>
     icalModules?: ICALModuleListRelationFilter
-  }, "ical_id" | "url">
+  }, "ical_id">
 
   export type ICALOrderByWithAggregationInput = {
     ical_id?: SortOrder
     url?: SortOrder
-    date_start?: SortOrder
-    date_end?: SortOrder
+    date_start?: SortOrderInput | SortOrder
+    date_end?: SortOrderInput | SortOrder
     client_id?: SortOrder
     _count?: ICALCountOrderByAggregateInput
     _max?: ICALMaxOrderByAggregateInput
@@ -9622,8 +9719,8 @@ export namespace Prisma {
     NOT?: ICALScalarWhereWithAggregatesInput | ICALScalarWhereWithAggregatesInput[]
     ical_id?: StringWithAggregatesFilter<"ICAL"> | string
     url?: StringWithAggregatesFilter<"ICAL"> | string
-    date_start?: DateTimeWithAggregatesFilter<"ICAL"> | Date | string
-    date_end?: DateTimeWithAggregatesFilter<"ICAL"> | Date | string
+    date_start?: DateTimeNullableWithAggregatesFilter<"ICAL"> | Date | string | null
+    date_end?: DateTimeNullableWithAggregatesFilter<"ICAL"> | Date | string | null
     client_id?: StringWithAggregatesFilter<"ICAL"> | string
   }
 
@@ -9945,6 +10042,9 @@ export namespace Prisma {
     email: string
     address: string
     status: string
+    hourly_rate?: number
+    tva_rate?: number
+    url_ICAL?: string
     date_creation?: Date | string
     date_update?: Date | string | null
     ICALs?: ICALCreateNestedManyWithoutClientInput
@@ -9958,6 +10058,9 @@ export namespace Prisma {
     email: string
     address: string
     status: string
+    hourly_rate?: number
+    tva_rate?: number
+    url_ICAL?: string
     date_creation?: Date | string
     date_update?: Date | string | null
     ICALs?: ICALUncheckedCreateNestedManyWithoutClientInput
@@ -9971,6 +10074,9 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    hourly_rate?: FloatFieldUpdateOperationsInput | number
+    tva_rate?: FloatFieldUpdateOperationsInput | number
+    url_ICAL?: StringFieldUpdateOperationsInput | string
     date_creation?: DateTimeFieldUpdateOperationsInput | Date | string
     date_update?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ICALs?: ICALUpdateManyWithoutClientNestedInput
@@ -9984,6 +10090,9 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    hourly_rate?: FloatFieldUpdateOperationsInput | number
+    tva_rate?: FloatFieldUpdateOperationsInput | number
+    url_ICAL?: StringFieldUpdateOperationsInput | string
     date_creation?: DateTimeFieldUpdateOperationsInput | Date | string
     date_update?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ICALs?: ICALUncheckedUpdateManyWithoutClientNestedInput
@@ -9997,6 +10106,9 @@ export namespace Prisma {
     email: string
     address: string
     status: string
+    hourly_rate?: number
+    tva_rate?: number
+    url_ICAL?: string
     date_creation?: Date | string
     date_update?: Date | string | null
   }
@@ -10007,6 +10119,9 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    hourly_rate?: FloatFieldUpdateOperationsInput | number
+    tva_rate?: FloatFieldUpdateOperationsInput | number
+    url_ICAL?: StringFieldUpdateOperationsInput | string
     date_creation?: DateTimeFieldUpdateOperationsInput | Date | string
     date_update?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -10017,6 +10132,9 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    hourly_rate?: FloatFieldUpdateOperationsInput | number
+    tva_rate?: FloatFieldUpdateOperationsInput | number
+    url_ICAL?: StringFieldUpdateOperationsInput | string
     date_creation?: DateTimeFieldUpdateOperationsInput | Date | string
     date_update?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -10024,8 +10142,8 @@ export namespace Prisma {
   export type ICALCreateInput = {
     ical_id?: string
     url: string
-    date_start: Date | string
-    date_end: Date | string
+    date_start?: Date | string | null
+    date_end?: Date | string | null
     client: ClientCreateNestedOneWithoutICALsInput
     icalModules?: ICALModuleCreateNestedManyWithoutIcalInput
   }
@@ -10033,8 +10151,8 @@ export namespace Prisma {
   export type ICALUncheckedCreateInput = {
     ical_id?: string
     url: string
-    date_start: Date | string
-    date_end: Date | string
+    date_start?: Date | string | null
+    date_end?: Date | string | null
     client_id: string
     icalModules?: ICALModuleUncheckedCreateNestedManyWithoutIcalInput
   }
@@ -10042,8 +10160,8 @@ export namespace Prisma {
   export type ICALUpdateInput = {
     ical_id?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
-    date_start?: DateTimeFieldUpdateOperationsInput | Date | string
-    date_end?: DateTimeFieldUpdateOperationsInput | Date | string
+    date_start?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    date_end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     client?: ClientUpdateOneRequiredWithoutICALsNestedInput
     icalModules?: ICALModuleUpdateManyWithoutIcalNestedInput
   }
@@ -10051,8 +10169,8 @@ export namespace Prisma {
   export type ICALUncheckedUpdateInput = {
     ical_id?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
-    date_start?: DateTimeFieldUpdateOperationsInput | Date | string
-    date_end?: DateTimeFieldUpdateOperationsInput | Date | string
+    date_start?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    date_end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     client_id?: StringFieldUpdateOperationsInput | string
     icalModules?: ICALModuleUncheckedUpdateManyWithoutIcalNestedInput
   }
@@ -10060,23 +10178,23 @@ export namespace Prisma {
   export type ICALCreateManyInput = {
     ical_id?: string
     url: string
-    date_start: Date | string
-    date_end: Date | string
+    date_start?: Date | string | null
+    date_end?: Date | string | null
     client_id: string
   }
 
   export type ICALUpdateManyMutationInput = {
     ical_id?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
-    date_start?: DateTimeFieldUpdateOperationsInput | Date | string
-    date_end?: DateTimeFieldUpdateOperationsInput | Date | string
+    date_start?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    date_end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ICALUncheckedUpdateManyInput = {
     ical_id?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
-    date_start?: DateTimeFieldUpdateOperationsInput | Date | string
-    date_end?: DateTimeFieldUpdateOperationsInput | Date | string
+    date_start?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    date_end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     client_id?: StringFieldUpdateOperationsInput | string
   }
 
@@ -10401,6 +10519,17 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
   export type DateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | null
@@ -10433,8 +10562,16 @@ export namespace Prisma {
     email?: SortOrder
     address?: SortOrder
     status?: SortOrder
+    hourly_rate?: SortOrder
+    tva_rate?: SortOrder
+    url_ICAL?: SortOrder
     date_creation?: SortOrder
     date_update?: SortOrder
+  }
+
+  export type ClientAvgOrderByAggregateInput = {
+    hourly_rate?: SortOrder
+    tva_rate?: SortOrder
   }
 
   export type ClientMaxOrderByAggregateInput = {
@@ -10443,6 +10580,9 @@ export namespace Prisma {
     email?: SortOrder
     address?: SortOrder
     status?: SortOrder
+    hourly_rate?: SortOrder
+    tva_rate?: SortOrder
+    url_ICAL?: SortOrder
     date_creation?: SortOrder
     date_update?: SortOrder
   }
@@ -10453,8 +10593,32 @@ export namespace Prisma {
     email?: SortOrder
     address?: SortOrder
     status?: SortOrder
+    hourly_rate?: SortOrder
+    tva_rate?: SortOrder
+    url_ICAL?: SortOrder
     date_creation?: SortOrder
     date_update?: SortOrder
+  }
+
+  export type ClientSumOrderByAggregateInput = {
+    hourly_rate?: SortOrder
+    tva_rate?: SortOrder
+  }
+
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
   }
 
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -10868,6 +11032,14 @@ export namespace Prisma {
     connect?: UserClientWhereUniqueInput | UserClientWhereUniqueInput[]
   }
 
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type NullableDateTimeFieldUpdateOperationsInput = {
     set?: Date | string | null
   }
@@ -11235,6 +11407,17 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | null
@@ -11244,6 +11427,22 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
   }
 
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -11285,17 +11484,6 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -11480,16 +11668,16 @@ export namespace Prisma {
   export type ICALCreateWithoutClientInput = {
     ical_id?: string
     url: string
-    date_start: Date | string
-    date_end: Date | string
+    date_start?: Date | string | null
+    date_end?: Date | string | null
     icalModules?: ICALModuleCreateNestedManyWithoutIcalInput
   }
 
   export type ICALUncheckedCreateWithoutClientInput = {
     ical_id?: string
     url: string
-    date_start: Date | string
-    date_end: Date | string
+    date_start?: Date | string | null
+    date_end?: Date | string | null
     icalModules?: ICALModuleUncheckedCreateNestedManyWithoutIcalInput
   }
 
@@ -11570,8 +11758,8 @@ export namespace Prisma {
     NOT?: ICALScalarWhereInput | ICALScalarWhereInput[]
     ical_id?: StringFilter<"ICAL"> | string
     url?: StringFilter<"ICAL"> | string
-    date_start?: DateTimeFilter<"ICAL"> | Date | string
-    date_end?: DateTimeFilter<"ICAL"> | Date | string
+    date_start?: DateTimeNullableFilter<"ICAL"> | Date | string | null
+    date_end?: DateTimeNullableFilter<"ICAL"> | Date | string | null
     client_id?: StringFilter<"ICAL"> | string
   }
 
@@ -11613,6 +11801,9 @@ export namespace Prisma {
     email: string
     address: string
     status: string
+    hourly_rate?: number
+    tva_rate?: number
+    url_ICAL?: string
     date_creation?: Date | string
     date_update?: Date | string | null
     bills?: BillCreateNestedManyWithoutClientInput
@@ -11625,6 +11816,9 @@ export namespace Prisma {
     email: string
     address: string
     status: string
+    hourly_rate?: number
+    tva_rate?: number
+    url_ICAL?: string
     date_creation?: Date | string
     date_update?: Date | string | null
     bills?: BillUncheckedCreateNestedManyWithoutClientInput
@@ -11670,6 +11864,9 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    hourly_rate?: FloatFieldUpdateOperationsInput | number
+    tva_rate?: FloatFieldUpdateOperationsInput | number
+    url_ICAL?: StringFieldUpdateOperationsInput | string
     date_creation?: DateTimeFieldUpdateOperationsInput | Date | string
     date_update?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     bills?: BillUpdateManyWithoutClientNestedInput
@@ -11682,6 +11879,9 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    hourly_rate?: FloatFieldUpdateOperationsInput | number
+    tva_rate?: FloatFieldUpdateOperationsInput | number
+    url_ICAL?: StringFieldUpdateOperationsInput | string
     date_creation?: DateTimeFieldUpdateOperationsInput | Date | string
     date_update?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     bills?: BillUncheckedUpdateManyWithoutClientNestedInput
@@ -11819,6 +12019,9 @@ export namespace Prisma {
     email: string
     address: string
     status: string
+    hourly_rate?: number
+    tva_rate?: number
+    url_ICAL?: string
     date_creation?: Date | string
     date_update?: Date | string | null
     ICALs?: ICALCreateNestedManyWithoutClientInput
@@ -11831,6 +12034,9 @@ export namespace Prisma {
     email: string
     address: string
     status: string
+    hourly_rate?: number
+    tva_rate?: number
+    url_ICAL?: string
     date_creation?: Date | string
     date_update?: Date | string | null
     ICALs?: ICALUncheckedCreateNestedManyWithoutClientInput
@@ -11890,6 +12096,9 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    hourly_rate?: FloatFieldUpdateOperationsInput | number
+    tva_rate?: FloatFieldUpdateOperationsInput | number
+    url_ICAL?: StringFieldUpdateOperationsInput | string
     date_creation?: DateTimeFieldUpdateOperationsInput | Date | string
     date_update?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ICALs?: ICALUpdateManyWithoutClientNestedInput
@@ -11902,6 +12111,9 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    hourly_rate?: FloatFieldUpdateOperationsInput | number
+    tva_rate?: FloatFieldUpdateOperationsInput | number
+    url_ICAL?: StringFieldUpdateOperationsInput | string
     date_creation?: DateTimeFieldUpdateOperationsInput | Date | string
     date_update?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ICALs?: ICALUncheckedUpdateManyWithoutClientNestedInput
@@ -11982,6 +12194,9 @@ export namespace Prisma {
     email: string
     address: string
     status: string
+    hourly_rate?: number
+    tva_rate?: number
+    url_ICAL?: string
     date_creation?: Date | string
     date_update?: Date | string | null
     ICALs?: ICALCreateNestedManyWithoutClientInput
@@ -11994,6 +12209,9 @@ export namespace Prisma {
     email: string
     address: string
     status: string
+    hourly_rate?: number
+    tva_rate?: number
+    url_ICAL?: string
     date_creation?: Date | string
     date_update?: Date | string | null
     ICALs?: ICALUncheckedCreateNestedManyWithoutClientInput
@@ -12059,6 +12277,9 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    hourly_rate?: FloatFieldUpdateOperationsInput | number
+    tva_rate?: FloatFieldUpdateOperationsInput | number
+    url_ICAL?: StringFieldUpdateOperationsInput | string
     date_creation?: DateTimeFieldUpdateOperationsInput | Date | string
     date_update?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ICALs?: ICALUpdateManyWithoutClientNestedInput
@@ -12071,6 +12292,9 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    hourly_rate?: FloatFieldUpdateOperationsInput | number
+    tva_rate?: FloatFieldUpdateOperationsInput | number
+    url_ICAL?: StringFieldUpdateOperationsInput | string
     date_creation?: DateTimeFieldUpdateOperationsInput | Date | string
     date_update?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ICALs?: ICALUncheckedUpdateManyWithoutClientNestedInput
@@ -12080,16 +12304,16 @@ export namespace Prisma {
   export type ICALCreateWithoutIcalModulesInput = {
     ical_id?: string
     url: string
-    date_start: Date | string
-    date_end: Date | string
+    date_start?: Date | string | null
+    date_end?: Date | string | null
     client: ClientCreateNestedOneWithoutICALsInput
   }
 
   export type ICALUncheckedCreateWithoutIcalModulesInput = {
     ical_id?: string
     url: string
-    date_start: Date | string
-    date_end: Date | string
+    date_start?: Date | string | null
+    date_end?: Date | string | null
     client_id: string
   }
 
@@ -12133,16 +12357,16 @@ export namespace Prisma {
   export type ICALUpdateWithoutIcalModulesInput = {
     ical_id?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
-    date_start?: DateTimeFieldUpdateOperationsInput | Date | string
-    date_end?: DateTimeFieldUpdateOperationsInput | Date | string
+    date_start?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    date_end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     client?: ClientUpdateOneRequiredWithoutICALsNestedInput
   }
 
   export type ICALUncheckedUpdateWithoutIcalModulesInput = {
     ical_id?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
-    date_start?: DateTimeFieldUpdateOperationsInput | Date | string
-    date_end?: DateTimeFieldUpdateOperationsInput | Date | string
+    date_start?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    date_end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     client_id?: StringFieldUpdateOperationsInput | string
   }
 
@@ -12262,8 +12486,8 @@ export namespace Prisma {
   export type ICALCreateManyClientInput = {
     ical_id?: string
     url: string
-    date_start: Date | string
-    date_end: Date | string
+    date_start?: Date | string | null
+    date_end?: Date | string | null
   }
 
   export type BillCreateManyClientInput = {
@@ -12283,24 +12507,24 @@ export namespace Prisma {
   export type ICALUpdateWithoutClientInput = {
     ical_id?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
-    date_start?: DateTimeFieldUpdateOperationsInput | Date | string
-    date_end?: DateTimeFieldUpdateOperationsInput | Date | string
+    date_start?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    date_end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     icalModules?: ICALModuleUpdateManyWithoutIcalNestedInput
   }
 
   export type ICALUncheckedUpdateWithoutClientInput = {
     ical_id?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
-    date_start?: DateTimeFieldUpdateOperationsInput | Date | string
-    date_end?: DateTimeFieldUpdateOperationsInput | Date | string
+    date_start?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    date_end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     icalModules?: ICALModuleUncheckedUpdateManyWithoutIcalNestedInput
   }
 
   export type ICALUncheckedUpdateManyWithoutClientInput = {
     ical_id?: StringFieldUpdateOperationsInput | string
     url?: StringFieldUpdateOperationsInput | string
-    date_start?: DateTimeFieldUpdateOperationsInput | Date | string
-    date_end?: DateTimeFieldUpdateOperationsInput | Date | string
+    date_start?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    date_end?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type BillUpdateWithoutClientInput = {

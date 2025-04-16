@@ -6,17 +6,6 @@ import { compare } from "bcryptjs"
 
 const prisma = new PrismaClient()
 
-declare module "next-auth" {
-    interface Session {
-        user: {
-            id: string
-            name?: string | null
-            email?: string | null
-            image?: string | null
-        }
-    }
-}
-
 export const authOptions: AuthOptions = {
     providers: [
         CredentialsProvider({
@@ -57,15 +46,20 @@ export const authOptions: AuthOptions = {
     callbacks: {
         async jwt({ token, user }) {
             if (user) {
+                console.log("🔐 JWT CALLBACK - USER:", user)
                 token.id = user.id
                 token.email = user.email
             }
             return token
         },
         async session({ session, token }) {
-            if (session?.user && token) {
-                session.user.id = token.id as string
-                session.user.email = token.email as string
+            console.log("📦 SESSION CALLBACK - TOKEN:", token)
+            if (session.user && token) {
+                session.user = {
+                    ...session.user,
+                    id: token.id as string,
+                    email: token.email as string,
+                }
             }
             return session
         },

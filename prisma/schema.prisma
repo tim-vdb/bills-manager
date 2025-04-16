@@ -40,6 +40,9 @@ model Client {
     email         String    @unique
     address       String
     status        String
+    hourly_rate   Float     @default(0)
+    tva_rate      Float     @default(0)
+    url_ICAL      String    @default("")
     date_creation DateTime  @default(now())
     date_update   DateTime? @updatedAt
 
@@ -49,10 +52,10 @@ model Client {
 }
 
 model ICAL {
-    ical_id    String   @id @default(cuid())
-    url        String   @unique
-    date_start DateTime
-    date_end   DateTime
+    ical_id    String    @id @default(cuid())
+    url        String
+    date_start DateTime?
+    date_end   DateTime?
 
     client    Client @relation(fields: [client_id], references: [client_id])
     client_id String

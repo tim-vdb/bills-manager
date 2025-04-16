@@ -131,6 +131,9 @@ exports.Prisma.ClientScalarFieldEnum = {
   email: 'email',
   address: 'address',
   status: 'status',
+  hourly_rate: 'hourly_rate',
+  tva_rate: 'tva_rate',
+  url_ICAL: 'url_ICAL',
   date_creation: 'date_creation',
   date_update: 'date_update'
 };

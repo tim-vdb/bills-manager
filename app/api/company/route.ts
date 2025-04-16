@@ -1,13 +1,23 @@
 // app/api/company/route.ts
 import { NextResponse } from "next/server"
 import { PrismaClient } from "@/generated/prisma"
+import { getServerSession } from "next-auth"
+import { authOptions } from "../auth/[...nextauth]/route"
 
 const prisma = new PrismaClient()
 
 export async function POST(req: Request) {
+  const session = await getServerSession(authOptions);
+
+  console.log("👤 SESSION USER:", session?.user)
+
+  if (!session) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+  }
+
   try {
-    const { name, email, address, status } = await req.json()
-    console.log("REÇU DU FRONT:", { name, email, address, status })
+    const { name, email, address, status, tvaRate, urlICAL, hourlyRate } = await req.json()
+    console.log("REÇU DU FRONT:", { name, email, address, status, tvaRate, urlICAL, hourlyRate })
 
     const existingClient = await prisma.client.findUnique({ where: { email } })
 
@@ -16,8 +26,17 @@ export async function POST(req: Request) {
     }
 
     const client = await prisma.client.create({
-      data: {"name": name, "email": email, "address": address, "status": status },
+      data: { "name": name, "email": email, "address": address, "status": status, "tva_rate": tvaRate, "url_ICAL": urlICAL, "hourly_rate": hourlyRate },
     })
+
+    await prisma.userClient.create({
+      data: {
+        user: { connect: { id: session.user.id } },
+        client: { connect: { client_id: client.client_id } },
+      },
+    })
+
+    console.log("Création client par user:", session.user.id)
 
     return NextResponse.json(client)
 
