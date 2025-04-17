@@ -84,9 +84,9 @@ export default function ProfilPage() {
           <p className="font-semibold">{client.name}</p>
           <p>{client.email}</p>
           <input type="text" />
-          <Button type="submit" variant="default" className="w-full py-3 text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-300 rounded-lg">
+          <Link href={`/admin/dashboard/bill/${client.client_id}`} className="w-full py-3 text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-300 rounded-lg">
             Generate Bill
-          </Button>
+          </Link>
         </Card>
       ))}
 
