@@ -76,8 +76,6 @@ export default function ProfilPage() {
         </div>
       </Card>
 
-      <DatePickerWithRange clients={clients} />
-
       {/* Liste des clients */}
       {clients.map((client) => (
         <Card key={client.client_id} className="p-4">

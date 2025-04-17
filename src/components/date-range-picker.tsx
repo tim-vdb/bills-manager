@@ -15,41 +15,35 @@ import {
 } from "@/src/components/ui/popover"
 
 type DatePickerWithRangeProps = {
-    clients: any[]
+    setDateFrom: React.Dispatch<React.SetStateAction<Date>>
+    setDateTo: React.Dispatch<React.SetStateAction<Date>>
     className?: string
 }
 
-export function DatePickerWithRange({ className, clients }: DatePickerWithRangeProps) {
+export function DatePickerWithRange({
+    className,
+    setDateFrom,
+    setDateTo,
+}: DatePickerWithRangeProps) {
     const [date, setDate] = React.useState<DateRange | undefined>({
         from: new Date(),
         to: addDays(new Date(), 30),
     })
 
-    const handleSaveDates = async () => {
+    const handleSaveDates = () => {
         if (!date?.from || !date?.to) {
             alert("Sélectionnez une plage de dates complète.")
             return
         }
-
-        const res = await fetch("/api/save-dates", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                startDate: date.from.toISOString(),
-                endDate: date.to.toISOString(),
-                clients: clients
-            }),
-        })
-
-        if (res.ok) {
-            console.log("✅ Dates sauvegardées !")
-        } else {
-            console.error("❌ Erreur lors de la sauvegarde des dates.")
-        }
+        setDateFrom(date.from)
+        setDateTo(date.to)
     }
 
+    React.useEffect(() => {
+        if (date?.from && date?.to) {
+            handleSaveDates()
+        }
+    }, [date])
 
     return (
         <div className={cn("grid gap-2", className)}>
@@ -64,7 +58,7 @@ export function DatePickerWithRange({ className, clients }: DatePickerWithRangeP
                             !date && "text-muted-foreground"
                         )}
                     >
-                        <CalendarIcon />
+                        <CalendarIcon className="mr-2 h-4 w-4" />
                         {date?.from ? (
                             date.to ? (
                                 <>
