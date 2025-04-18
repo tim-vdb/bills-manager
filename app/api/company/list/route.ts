@@ -12,11 +12,7 @@ export async function GET() {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
 
-    const userId = session.user?.id || session.user?.sub // sub = fallback si jamais
-
-    console.log("✅ USER ID SESSION:", userId)
-
-    // const userId = session.user.id
+    const userId = session.user?.id || session.user?.sub
 
     try {
         const userClients = await prisma.userClient.findMany({
@@ -30,7 +26,6 @@ export async function GET() {
                 },
             },
         })
-        console.log("USER ID SESSION:", userId)
 
         const clients = userClients.map(uc => uc.client)
 

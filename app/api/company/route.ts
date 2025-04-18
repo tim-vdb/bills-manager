@@ -9,8 +9,6 @@ const prisma = new PrismaClient()
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions);
 
-  console.log("👤 SESSION USER:", session?.user)
-
   if (!session) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
   }
@@ -35,8 +33,6 @@ export async function POST(req: Request) {
         client: { connect: { client_id: client.client_id } },
       },
     })
-
-    console.log("Création client par user:", session.user.id)
 
     return NextResponse.json(client)
 

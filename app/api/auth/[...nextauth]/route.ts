@@ -46,14 +46,12 @@ export const authOptions: AuthOptions = {
     callbacks: {
         async jwt({ token, user }) {
             if (user) {
-                console.log("🔐 JWT CALLBACK - USER:", user)
                 token.id = user.id
                 token.email = user.email
             }
             return token
         },
         async session({ session, token }) {
-            console.log("📦 SESSION CALLBACK - TOKEN:", token)
             if (session.user && token) {
                 session.user = {
                     ...session.user,

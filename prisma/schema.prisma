@@ -46,7 +46,7 @@ model Client {
     date_creation DateTime  @default(now())
     date_update   DateTime? @updatedAt
 
-    ICALs       ICAL[]
+    ICALs       ICAL[]  
     bills       Bill[]
     userClients UserClient[]
 }
@@ -57,7 +57,7 @@ model ICAL {
     date_start DateTime?
     date_end   DateTime?
 
-    client    Client @relation(fields: [client_id], references: [client_id])
+    client    Client @relation(fields: [client_id], references: [client_id], onDelete: Cascade)
     client_id String
 
     icalModules ICALModule[]
@@ -83,7 +83,7 @@ model Bill {
     tva           Int?
     status        String
 
-    client    Client @relation(fields: [client_id], references: [client_id])
+    client    Client @relation(fields: [client_id], references: [client_id], onDelete: Cascade)
     client_id String
 
     user User   @relation(fields: [id], references: [id])
@@ -95,7 +95,7 @@ model UserClient {
     client_id String
 
     user   User   @relation(fields: [id], references: [id])
-    client Client @relation(fields: [client_id], references: [client_id])
+    client Client @relation(fields: [client_id], references: [client_id], onDelete: Cascade)
 
     @@id([id, client_id])
 }

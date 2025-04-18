@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation"
 import { Input } from "@/src/components/ui/input"
 import { Button } from "@/src/components/ui/button"
 import { Card } from "@/src/components/ui/card"
+import Link from "next/link"
 
 export default function RegisterPage() {
   const [firstname, setFirstname] = useState("")
@@ -37,36 +38,41 @@ export default function RegisterPage() {
         <form onSubmit={handleSubmit} className="space-y-6">
           <Input 
             type="text" 
-            placeholder="Nom" 
-            value={lastname} 
+            placeholder="Nom*" 
+            value={lastname}
+            required  
             onChange={(e) => setLastname(e.target.value)} 
             className="w-full p-3 border rounded-md shadow-sm focus:ring-2 focus:ring-blue-500"
           />
           <Input 
             type="text" 
-            placeholder="Prénom" 
-            value={firstname} 
+            placeholder="Prénom*" 
+            value={firstname}
+            required 
             onChange={(e) => setFirstname(e.target.value)} 
             className="w-full p-3 border rounded-md shadow-sm focus:ring-2 focus:ring-blue-500"
           />
           <Input 
             type="text" 
             placeholder="SIRET" 
-            value={companyNumber} 
+            value={companyNumber}
+            required 
             onChange={(e) => setCompanyNumber(e.target.value)} 
             className="w-full p-3 border rounded-md shadow-sm focus:ring-2 focus:ring-blue-500"
           />
           <Input 
             type="email" 
             placeholder="Email" 
-            value={email} 
+            value={email}
+            required 
             onChange={(e) => setEmail(e.target.value)} 
             className="w-full p-3 border rounded-md shadow-sm focus:ring-2 focus:ring-blue-500"
           />
           <Input 
             type="password" 
             placeholder="Mot de passe" 
-            value={password} 
+            value={password}
+            required 
             onChange={(e) => setPassword(e.target.value)} 
             className="w-full p-3 border rounded-md shadow-sm focus:ring-2 focus:ring-blue-500"
           />
@@ -78,6 +84,7 @@ export default function RegisterPage() {
             S'inscrire
           </Button>
         </form>
+        <Link href={"/admin/auth/login"}>Login</Link>
       </Card>
     </div>
   )

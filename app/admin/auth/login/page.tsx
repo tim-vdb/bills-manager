@@ -5,6 +5,7 @@ import { Button } from "@/src/components/ui/button"
 import { Card } from "@/src/components/ui/card"
 import { Input } from "@/src/components/ui/input"
 import { signIn } from "next-auth/react"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 
@@ -29,21 +30,23 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 py-10">
-      <Card className="p-8 shadow-lg rounded-lg w-full sm:max-w-md mx-auto bg-white">
+      <Card className="p-8 shadow-lg rounded-lg w-full sm:max-w-md mx-auto bg-white text-center">
         <h2 className="text-2xl font-bold text-center mb-6">Se connecter</h2>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <Input 
             type="email" 
             placeholder="Email" 
-            value={email} 
+            value={email}
+            required 
             onChange={(e) => setEmail(e.target.value)} 
             className="w-full p-3 border rounded-md shadow-sm focus:ring-2 focus:ring-blue-500"
           />
           <Input 
             type="password" 
             placeholder="Mot de passe" 
-            value={password} 
+            value={password}
+            required 
             onChange={(e) => setPassword(e.target.value)} 
             className="w-full p-3 border rounded-md shadow-sm focus:ring-2 focus:ring-blue-500"
           />
@@ -55,6 +58,7 @@ export default function LoginPage() {
             Se connecter
           </Button>
         </form>
+        <Link href={"/admin/auth/register"}>Sign up</Link>
       </Card>
     </div>
   )

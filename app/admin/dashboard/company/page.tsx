@@ -22,7 +22,7 @@ export default function RegisterPage() {
         e.preventDefault()
         const res = await fetch("/api/company", {
             method: "POST",
-            body: JSON.stringify({ "name": name, "email": email, "address": address, "status": status, tva_rate: tvaRate, url_ICAL: urlICAL, hourly_rate: hourlyRate }),
+            body: JSON.stringify({ "name": name, "email": email, "address": address, "status": status, tvaRate: tvaRate, urlICAL: urlICAL, hourlyRate: hourlyRate }),
         })
 
         if (res.ok) {
@@ -37,7 +37,7 @@ export default function RegisterPage() {
             <Card className="p-8 shadow-lg rounded-lg w-full sm:max-w-md mx-auto bg-white">
                 <h2 className="text-2xl font-bold text-center mb-6">Add a company</h2>
 
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6 flex flex-col">
                     <Label>
                         Name :
                         <Input required
@@ -60,9 +60,8 @@ export default function RegisterPage() {
                     </Label>
                     <Label>
                         Address :
-                        <Input
+                        <textarea
                             required
-                            type="address"
                             value={address}
                             onChange={(e) => setAddress(e.target.value)}
                             className="w-full p-3 border rounded-md shadow-sm focus:ring-2 focus:ring-blue-500"
@@ -74,15 +73,17 @@ export default function RegisterPage() {
                             type="number"
                             placeholder="0.20"
                             value={tvaRate}
+                            required
                             onChange={(e) => setTvaRate(parseFloat(e.target.value))}
                             className="w-full p-3 border rounded-md shadow-sm focus:ring-2 focus:ring-blue-500"
                         />
                     </Label>
                     <Label>
                         Hourly rate :
-                        <Input step={0.1}
+                        <Input
                             type="number"
                             value={hourlyRate}
+                            required
                             onChange={(e) => {
                                 const value = e.target.value
                                 setHourlyRate(value === '' ? '' : parseFloat(value))
@@ -98,11 +99,6 @@ export default function RegisterPage() {
                             className="w-full p-3 border rounded-md shadow-sm focus:ring-2 focus:ring-blue-500"
                         />
                     </Label>
-                    <select value={status} id="" onChange={(e) => setStatus(e.target.value)} required>
-                        <option value="" disabled>Select status</option>
-                        <option value="active">Active</option>
-                        <option value="inactive">Inactive</option>
-                    </select>
                     <Button
                         type="submit"
                         variant="default"

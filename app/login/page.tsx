@@ -4,7 +4,6 @@ import Form from 'next/form'
 import { Label } from '@radix-ui/react-label'
 import { Card, CardContent, CardHeader, CardTitle } from '@/src/components/ui/card'
 import { Input } from '@/src/components/ui/input'
-import { loginUserAction } from '../user.action';
 import { Button } from '@/src/components/ui/button';
 
 export default function Page() {
@@ -36,11 +35,11 @@ export default function Page() {
             }} className='flex flex-col gap-4' >
               <Label className='flex flex-col items-start'>
                 <p>Email :</p>
-                <Input type='email' placeholder='example@gmail.com' name='email' />
+                <Input type='email' placeholder='example@gmail.com' name='email' required />
               </Label>
               <Label className='flex flex-col items-start'>
                 <p>Password :</p>
-                <Input type='password' name='password' />
+                <Input type='password' name='password' required />
               </Label>
               <Button type='submit' className='cursor-pointer'>Submit</Button>
             </Form>

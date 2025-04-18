@@ -42,6 +42,8 @@ type BillDraftProps = {
     tvaRate: number
     setTvaRate: React.Dispatch<React.SetStateAction<number>>
     totalAmount: number
+    reference: string
+    setReference: React.Dispatch<React.SetStateAction<string>>
 }
 
 
@@ -74,14 +76,15 @@ export default function BillDraft({
     tvaRate,
     setTvaRate,
     totalAmount,
+    reference,
+    setReference,
 
 }: BillDraftProps) {
 
     return (
         <div className="space-y-6 p-6">
-            <DatePickerWithRange setDateFrom={setDateFrom} setDateTo={setDateTo} />
-            <div className="flex items-start">
-                <div className="flex flex-col gap-5 items-start w-full">
+            <div className="flex items-start gap-4">
+                <div className="flex flex-col gap-5 w-full">
                     <Label className="flex flex-col justify-between items-start">
                         <p className="whitespace-nowrap">Last Name :</p>
                         <Input
@@ -111,7 +114,7 @@ export default function BillDraft({
                         />
                     </Label>
                 </div>
-                <div className="flex flex-col gap-5 items-start w-full">
+                <div className="flex flex-col gap-5 w-full">
                     <Label className="flex flex-col justify-between items-start">
                         <p>Name :</p>
                         <Input
@@ -147,12 +150,19 @@ export default function BillDraft({
                             onChange={(e) => setTvaRate(Number(e.target.value))} // Met à jour la valeur de tvaRate
                         />
                     </Label>
+                    <Label className="flex flex-col justify-between items-start">
+                        <p>Invoice Reference :</p>
+                        <Input type="text"
+                            value={reference}
+                            onChange={(e) => setReference(e.target.value)} // Met à jour la valeur de tvaRate
+                        />
+                    </Label>
                 </div>
             </div>
             <div className="space-y-6 p-6">
                 {icalData && Array.isArray(icalData.events) && (
                     <Table className="w-full">
-                        <TableCaption>Liste de vos événements iCal</TableCaption>
+                        <TableCaption>List of ICAL Events</TableCaption>
                         <TableHeader>
                             <TableRow>
                                 <TableHead className="text-right">Action</TableHead>
@@ -169,7 +179,7 @@ export default function BillDraft({
                                 <TableRow key={index}>
                                     <TableCell className="text-right">
                                         <button
-                                            className={`text-sm p-2 px-4 text-white rounded duration-200 ${openStates[index] ? 'bg-red-500' : 'bg-green-400'
+                                            className={`text-sm p-2 px-4 w-20 text-white rounded duration-200 ${openStates[index] ? 'bg-red-500' : 'bg-green-400'
                                                 }`}
                                             onClick={() => toggleItem(index)}
                                         >
@@ -196,7 +206,7 @@ export default function BillDraft({
                             </TableRow>
                             <TableRow>
                                 <TableCell colSpan={6} className="text-right font-bold text-2xl">Total</TableCell>
-                                <TableCell  colSpan={6} className="font-bold text-2xl">{((totalAmount ?? 0) * (1 + tvaRate)).toFixed(2)}€</TableCell>
+                                <TableCell colSpan={6} className="font-bold text-2xl">{((totalAmount ?? 0) * (1 + tvaRate)).toFixed(2)}€</TableCell>
                             </TableRow>
                         </TableFooter>
                     </Table>
