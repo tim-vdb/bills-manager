@@ -30,6 +30,9 @@ type BillPreviewProps = {
   tvaRate: number
   totalAmount: number
   reference: string
+  IBAN: string,
+  BIC: string
+  paymentTerms: string
 }
 
 export default function BillPreview({
@@ -50,35 +53,39 @@ export default function BillPreview({
   tvaRate,
   totalAmount,
   reference,
+  IBAN,
+  BIC,
+  paymentTerms,
 
 }: BillPreviewProps) {
   return (
     <div className="space-y-20 p-8">
-      <div className="flex items-start justify-between border-b border-b-slate-900">
-        <div className="flex flex-col gap-5">
+      <div className="flex items-start gap-10 flex-col sm:flex-row">
+        <div className="flex flex-col gap-5 w-full">
+          <h2 className="font-medium underline">User informations</h2>
           <p className="whitespace-nowrap">Last Name : {lastName}</p>
           <p className="whitespace-nowrap">First Name : {firstName}</p>
           <p className="whitespace-nowrap">Email : {email}</p>
           <p className="whitespace-nowrap">Company Number : {companyNumber}</p>
         </div>
-        <div className="flex flex-col gap-5 text-right">
-          <p>Name : {clientName}</p>
-          <p>Email : {clientEmail}</p>
-          <p>Address : {clientAddress}</p>
-          <p>Hourly Rate : {hourlyRate}</p>
-          <p>TVA Rate : {tvaRate}</p>
-          <p>Invoice Reference : {reference}</p>
+        <div className="w-full border-2 border-b-slate-900 sm:hidden"></div>
+        <div className="flex flex-col gap-5 sm:text-right">
+          <h2 className="font-medium underline">Company informations</h2>
+          <p className="whitespace-nowrap">Name : {clientName}</p>
+          <p className="whitespace-nowrap">Email : {clientEmail}</p>
+          <p className="whitespace-nowrap">Address : {clientAddress}</p>
+          <p className="whitespace-nowrap">Hourly Rate : {hourlyRate}</p>
+          <p className="whitespace-nowrap">TVA Rate : {tvaRate}</p>
+          <p className="whitespace-nowrap">Invoice Reference : {reference}</p>
         </div>
       </div>
       <div>
         {icalData && Array.isArray(icalData.events) && (
-          <Table className="w-full">
+          <Table className="table-auto w-full print:table print:w-full">
             <TableCaption>List of ICAL Events</TableCaption>
             <TableHeader>
               <TableRow>
                 <TableHead className="w-[200px]">Label</TableHead>
-                <TableHead>Date Start</TableHead>
-                <TableHead>Date End</TableHead>
                 <TableHead>Hours</TableHead>
                 <TableHead>Hourly Rate</TableHead>
                 <TableHead>Amount</TableHead>
@@ -88,17 +95,17 @@ export default function BillPreview({
               {icalData.events.map((event: any, index: number) =>
                 !openStates[index] ? (
                   <TableRow key={index}>
-                    <TableCell className="font-medium">{event.summary}</TableCell>
-                    <TableCell>{new Date(event.start).toLocaleString()}</TableCell>
-                    <TableCell>{new Date(event.end).toLocaleString()}</TableCell>
+                    <TableCell className="flex flex-col font-medium">
+                      <p className="overflow-hidden text-ellipsis whitespace-nowrap max-w-70">{event.summary}</p>
+                      <p className="overflow-hidden text-ellipsis whitespace-nowrap max-w-70">{new Date(event.start).toLocaleString()}</p>
+                      <p className="overflow-hidden text-ellipsis whitespace-nowrap max-w-70">{new Date(event.end).toLocaleString()}</p>
+                    </TableCell>
                     <TableCell>{event.totalHours}</TableCell>
                     <TableCell>{hourlyRate}</TableCell>
-                    <TableCell>{event.totalHours * hourlyRate}</TableCell>
+                    <TableCell>{(event.totalHours * hourlyRate).toFixed(2)}</TableCell>
                   </TableRow>
                 ) : null
               )}
-            </TableBody>
-            <TableFooter>
               <TableRow>
                 <TableCell colSpan={6} className="text-right">Subtotal</TableCell>
                 <TableCell colSpan={7}>{(totalAmount ?? 0).toFixed(2)}€</TableCell>
@@ -111,9 +118,32 @@ export default function BillPreview({
                 <TableCell colSpan={6} className="text-right font-bold text-2xl">Total</TableCell>
                 <TableCell colSpan={6} className="font-bold text-2xl">{((totalAmount ?? 0) * (1 + tvaRate)).toFixed(2)}€</TableCell>
               </TableRow>
-            </TableFooter>
+            </TableBody>
           </Table>
         )}
+
+        <p className="mt-8 text-sm">
+        Thank you for your business. Please make payment within <strong>{paymentTerms}</strong> of the invoice date.
+        </p>
+
+        {(IBAN || BIC) && (
+          <div className="text-sm mt-2">
+            <p>Payment method: <strong>Bank transfer</strong></p>
+            {IBAN && <p>IBAN : <strong>{IBAN}</strong></p>}
+            {BIC && <p>BIC : <strong>{BIC}</strong></p>}
+          </div>
+        )}
+        <p className="text-xs text-gray-500 mt-6">
+        Any service started is due. In the event of late payment, penalties may be applied in accordance with current legislation.
+        </p>
+
+        <div className="mt-10 text-sm text-gray-800">
+          <p>Signature of the service provider:</p>
+          <div className="h-16 border-b border-gray-400 w-64 mt-2"></div>
+        </div>
+        <p className="text-xs text-gray-500 mt-1">
+        Cette facture a été générée automatiquement. Pour toute question, merci de nous contacter à l'adresse : <strong>contact@yourcompany.com</strong>
+        </p>
       </div>
     </div>
   )

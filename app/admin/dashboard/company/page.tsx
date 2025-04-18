@@ -7,6 +7,8 @@ import { Input } from "@/src/components/ui/input"
 import { Button } from "@/src/components/ui/button"
 import { Card } from "@/src/components/ui/card"
 import { Label } from "@radix-ui/react-label"
+import Link from "next/link"
+import toast from "react-hot-toast"
 
 export default function RegisterPage() {
     const [name, setName] = useState("")
@@ -25,21 +27,24 @@ export default function RegisterPage() {
             body: JSON.stringify({ "name": name, "email": email, "address": address, "status": status, tvaRate: tvaRate, urlICAL: urlICAL, hourlyRate: hourlyRate }),
         })
 
-        if (res.ok) {
-            router.push("/admin/dashboard")
+        const data = await res.json()
+
+        if (res?.ok) {
+            toast.success("Company added Successfully !")
+            router.push("/admin/dashboard") // ou autre route protégée
         } else {
-            alert("error company when added")
+            toast.error(data.error || "Invalid credentials.")
         }
     }
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100 py-10">
-            <Card className="p-8 shadow-lg rounded-lg w-full sm:max-w-md mx-auto bg-white">
+            <Card className="p-8 shadow-lg rounded-lg w-full sm:max-w-2/4 mx-auto bg-slate-900 text-white text-center">
                 <h2 className="text-2xl font-bold text-center mb-6">Add a company</h2>
 
                 <form onSubmit={handleSubmit} className="space-y-6 flex flex-col">
-                    <Label>
-                        Name :
+                    <Label className="flex flex-col items-start gap-2">
+                        <p>Name :<span className="text-red-500">*</span></p>
                         <Input required
                             type="text"
                             value={name}
@@ -47,8 +52,8 @@ export default function RegisterPage() {
                             className="w-full p-3 border rounded-md shadow-sm focus:ring-2 focus:ring-blue-500"
                         />
                     </Label>
-                    <Label>
-                        Email :
+                    <Label className="flex flex-col items-start gap-2">
+                        <p>Email :<span className="text-red-500">*</span></p>
                         <Input
                             required
                             type="email"
@@ -58,8 +63,8 @@ export default function RegisterPage() {
                             className="w-full p-3 border rounded-md shadow-sm focus:ring-2 focus:ring-blue-500"
                         />
                     </Label>
-                    <Label>
-                        Address :
+                    <Label className="flex flex-col items-start gap-2">
+                        <p>Address :<span className="text-red-500">*</span></p>
                         <textarea
                             required
                             value={address}
@@ -67,8 +72,8 @@ export default function RegisterPage() {
                             className="w-full p-3 border rounded-md shadow-sm focus:ring-2 focus:ring-blue-500"
                         />
                     </Label>
-                    <Label>
-                        TVA rate :
+                    <Label className="flex flex-col items-start gap-2">
+                        <p>TVA rate :<span className="text-red-500">*</span></p>
                         <Input step={0.1} min={0} max={1}
                             type="number"
                             placeholder="0.20"
@@ -78,11 +83,12 @@ export default function RegisterPage() {
                             className="w-full p-3 border rounded-md shadow-sm focus:ring-2 focus:ring-blue-500"
                         />
                     </Label>
-                    <Label>
-                        Hourly rate :
+                    <Label className="flex flex-col items-start gap-2">
+                        <p>Hourly rate :<span className="text-red-500">*</span></p>
                         <Input
                             type="number"
                             value={hourlyRate}
+                            placeholder="ex: 11.88"
                             required
                             onChange={(e) => {
                                 const value = e.target.value
@@ -90,8 +96,8 @@ export default function RegisterPage() {
                             }}
                             className="w-full p-3 border rounded-md shadow-sm focus:ring-2 focus:ring-blue-500" />
                     </Label>
-                    <Label >
-                        URL ICAL :
+                    <Label className="flex flex-col items-start gap-2">
+                        <p>URL ICAL :</p>
                         <Input
                             type="text"
                             value={urlICAL}
@@ -102,11 +108,12 @@ export default function RegisterPage() {
                     <Button
                         type="submit"
                         variant="default"
-                        className="w-full py-3 text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-300 rounded-lg"
+                        className="flex items-center gap-4 px-8 shadowBlue border-2 border-blue-400 mx-auto duration-200 w-fit shadowBlue py-3 text-white rounded-lg"
                     >
-                        Add Company
+                        Add this company
                     </Button>
                 </form>
+                <Link href={"/admin/dashboard"} className="hover:underline w-fit mx-auto">Back to dashboard</Link>
             </Card>
         </div>
     )

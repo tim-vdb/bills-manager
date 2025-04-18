@@ -10,6 +10,7 @@ import { Button } from "@/src/components/ui/button"
 import { Input } from "@/src/components/ui/input"
 import { Label } from "@/src/components/ui/label"
 import { debounce } from "lodash"
+import Link from "next/link"
 import { useCallback, useEffect, useState, useTransition } from "react"
 
 type Props = {
@@ -41,6 +42,9 @@ export default function PageClient({ initialUrl, billClientId, initialClient, in
     const [firstName, setFirstName] = useState(initialUser.first_name)
     const [email, setEmail] = useState(initialUser.email)
     const [companyNumber, setCompanyNumber] = useState(initialUser.company_number)
+    const [IBAN, setIBAN] = useState("")
+    const [BIC, setBIC] = useState("")
+    const [paymentTerms, setPaymentTerms] = useState("15 days")
 
     const [clientName, setClientName] = useState(initialClient.name)
     const [clientEmail, setClientEmail] = useState(initialClient.email)
@@ -85,32 +89,50 @@ export default function PageClient({ initialUrl, billClientId, initialClient, in
         if (url) fetchData(url)
     }, [dateFrom, dateTo])
 
+    const printNow = () => {
+        window.print()
+    }
+
     return (
         <div className="space-y-6 relative w-full">
             {!showPreview && (
-                <div className="flex flex-col gap-6 lg:gap-0 lg:flex-row items-center justify-between bg-slate-900 px-5 py-5 sticky top-0 z-999">
-                    <Label className="flex items-center text-white font-medium">
-                        <p>Paste your ICAL URL :</p>
-                        <Input
-                            type="text"
-                            value={url}
-                            onChange={handleChange}
-                            className="w-70 border-white p-2"
+                <div className="flex flex-col bg-slate-900">
+                    <Link
+                        href="/admin/dashboard"
+                        className="group font-medium text-white w-fit"
+                    >
+                        <p className="flex items-center p-4">
+                            <span className="transition-transform transform group-hover:-translate-x-2">
+                                &#8592;
+                            </span>
+                            <span className="group-hover:underline font-medium p-2">Back to dashboard</span>
+                        </p>
+                    </Link>
+
+                    <div className="flex flex-col gap-6 lg:gap-0 lg:flex-row items-center justify-between px-5 py-5 sm:sticky top-0 z-999">
+                        <Label className="flex flex-col sm:flex-row items-center text-white font-medium">
+                            <p>Paste your ICAL URL :</p>
+                            <Input
+                                type="text"
+                                value={url}
+                                onChange={handleChange}
+                                className="w-70 border-white p-2"
                             />
-                    </Label>
-                    <Label className="flex items-center font-medium">
-                        <p className="text-white">Select a period :</p>
-                        <DatePickerWithRange setDateFrom={setDateFrom} setDateTo={setDateTo} />
-                    </Label>
+                        </Label>
+                        <Label className="flex flex-col sm:flex-row items-center font-medium">
+                            <p className="text-white">Select a period :</p>
+                            <DatePickerWithRange setDateFrom={setDateFrom} setDateTo={setDateTo} />
+                        </Label>
+                    </div>
                 </div>
             )}
-            <h1 className="text-6xl text-center font-medium">Invoice</h1>
+            <h1 className="text-6xl text-center font-medium my-10">Invoice</h1>
 
-            {isPending && <p className="text-gray-500 italic">Chargement...</p>}
+            {isPending && <div className="w-full flex items-center justify-center"><img className='flex items-center animate-spin w-5' src="/icons/spinner.svg" /></div>}
 
             {showPreview ? (
                 <BillPreview
-                url={url}
+                    url={url}
                     icalData={icalData}
                     openStates={openStates}
                     toggleItem={toggleItem}
@@ -127,6 +149,9 @@ export default function PageClient({ initialUrl, billClientId, initialClient, in
                     tvaRate={tvaRate}
                     totalAmount={totalAmount}
                     reference={reference}
+                    IBAN={IBAN}
+                    BIC={BIC}
+                    paymentTerms={paymentTerms}
                 />
             ) : (
                 <BillDraft
@@ -159,12 +184,24 @@ export default function PageClient({ initialUrl, billClientId, initialClient, in
                     totalAmount={totalAmount}
                     reference={reference}
                     setReference={setReference}
+                    IBAN={IBAN}
+                    setIBAN={setIBAN}
+                    BIC={BIC}
+                    setBIC={setBIC}
+                    paymentTerms={paymentTerms}
+                    setPaymentTerms={setPaymentTerms}
                 />
             )}
 
-            <Button onClick={() => setShowPreview(!showPreview)} className="print:hidden sticky bottom-10 left-full mr-20 bg-slate-900">
-                {showPreview ? "Show Draft" : "Show Preview"}
-            </Button>
+            <div className="flex items-end justify-end gap-2 print:hidden sticky bottom-10 m-5">
+                <Button onClick={() => setShowPreview(!showPreview)} className="bg-slate-900 cursor-pointer hover:bg-slate-700">
+                    {showPreview ? "Show Draft" : "Show Preview"}
+                </Button>
+                {showPreview &&
+                    <Button onClick={() => { printNow() }} className="bg-slate-900 cursor-pointer hover:bg-slate-700">
+                        Print Now !
+                    </Button>}
+            </div>
         </div>
     )
 }

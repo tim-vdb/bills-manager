@@ -1,37 +1,29 @@
-"use client"
-import { Button } from '@/src/components/ui/button'
-import React, { useState } from 'react'
-import { redirect, useRouter } from 'next/navigation'
-import { deleteClientAction } from '@/app/api/user.action';
+import { deleteClientAction } from "@/app/api/user.action"
+import { Button } from "./ui/button"
+import toast from "react-hot-toast"
 
-export default function DeleteClientButton(props: { id: string; onDeleteSuccess: () => void }) {
-    const [isConfirm, setIsConfirm] = useState(false)
-
+export default function DeleteClientButton(props: {
+    id: string
+    onDeleteSuccess: (deletedId: string) => void
+}) {
     const onDelete = async () => {
         const result = await deleteClientAction(props.id)
 
         if (result.message) {
-            setIsConfirm(false)
-            props.onDeleteSuccess() // refetch la liste
+            toast.success("Client deleted successfully")
+            props.onDeleteSuccess(props.id)
         } else if (result.error) {
-            alert(result.error)
+            toast.error(result.error || "Something went wrong.")
         }
     }
 
     return (
         <Button
-            onClick={() => {
-                if (isConfirm) {
-                    onDelete()
-                } else {
-                    setIsConfirm(true)
-                }
-            }}
+            onClick={onDelete}
             variant="destructive"
-            className="w-fit"
+            className="w-fit hover:cursor-pointer bg-red-400"
         >
-            Supprimer un client
+            Delete customer
         </Button>
     )
 }
-
