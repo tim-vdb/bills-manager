@@ -1,5 +1,4 @@
 import { Client, User } from "@/generated/prisma"
-import { DatePickerWithRange } from "./date-range-picker"
 import {
     Table,
     TableBody,
@@ -181,7 +180,7 @@ export default function BillDraft({
                         <p>Address :</p>
                         <Textarea
                             value={clientAddress}
-                            onChange={(e) => setClientAddress(e.target.value)} // Met à jour la valeur de clientAddress
+                            onChange={(e) => setClientAddress(e.target.value)} 
                         />
                     </Label>
                     <Label className="flex flex-col justify-between items-start">

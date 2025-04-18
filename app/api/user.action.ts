@@ -1,7 +1,6 @@
 "use server";
 import { prisma } from "@/src/lib/prisma";
 import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
 import { authOptions } from "./auth/[...nextauth]/route";
 
 export async function deleteClientAction(id: string) {

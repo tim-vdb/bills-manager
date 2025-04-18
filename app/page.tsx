@@ -1,5 +1,3 @@
-import { Prisma } from "@/generated/prisma";
-import { Button, buttonVariants } from "@/src/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/src/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,7 +14,7 @@ export default async function Home() {
         </CardHeader>
         <CardContent>
           <h2 className="text-center">Don't Waste your time !</h2>
-          <Link href={"/register"}>
+          <Link href={"/register"} className="flex items-center gap-4 px-8 shadowBlue border-2 border-blue-400 mx-auto duration-200 w-fit shadowBlue py-3 rounded-lg">
             Discover the app !
           </Link>
         </CardContent>
@@ -24,20 +22,3 @@ export default async function Home() {
     </div>
   );
 }
-
-
-// import { Button } from "@/src/components/ui/button";
-// import Link from "next/link";
-
-// export default function Home() {
-//   return (
-//     <main className="flex min-h-screen items-center justify-center gap-4">
-//       <Link href='/admin/auth/register'>
-//         <Button>S'inscrire</Button>
-//       </Link>
-//       <Link href='/admin/auth/login'>
-//         <Button>Se connecter</Button>
-//       </Link>
-//     </main>
-//   );
-// }

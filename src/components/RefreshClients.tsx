@@ -24,11 +24,10 @@ export default function RefreshClients() {
 
         fetchClients()
 
-    }, [router]) // L'effet sera appelé lors du montage et du changement de route
+    }, [router])
 
-    // Rafraîchir la page avec router.refresh() après une action
     const refreshPage = () => {
-        router.refresh() // Cette méthode rafraîchit la page
+        router.refresh()
     }
 
     return (
@@ -43,10 +42,8 @@ export default function RefreshClients() {
                             <p>{client.email}</p>
                             <button
                                 onClick={() => {
-                                    // Simulation de la suppression du client
-                                    // Tu peux mettre ici la logique de suppression réelle
                                     console.log(`Client ${client.name} supprimé.`)
-                                    refreshPage() // Appel de router.refresh() après suppression
+                                    refreshPage()
                                 }}
                                 className="text-red-500"
                             >

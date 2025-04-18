@@ -27,7 +27,7 @@ export default function LoginPage() {
 
     if (res?.ok) {
       toast.success("Successfully logged in!")
-      router.push("/admin/dashboard") // ou autre route protégée
+      router.push("/admin/dashboard")
     } else {
       toast.error(res?.error || "Invalid credentials.")
     }
@@ -41,7 +41,7 @@ export default function LoginPage() {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <Label className="flex flex-col items-start gap-2">
-            <p>Email :<span className="text-red-500">*</span></p>
+            <p>Email:<span className="text-red-500">*</span></p>
             <Input
               type="email"
               placeholder="example@gmail.com"
@@ -52,7 +52,7 @@ export default function LoginPage() {
             />
           </Label>
           <Label className="flex flex-col items-start gap-2">
-            <p>Password :<span className="text-red-500">*</span></p>
+            <p>Password:<span className="text-red-500">*</span></p>
             <Input
               type="password"
               value={password}

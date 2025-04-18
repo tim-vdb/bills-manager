@@ -53,7 +53,7 @@ export default function RegisterPage() {
                         />
                     </Label>
                     <Label className="flex flex-col items-start gap-2">
-                        <p>Email :<span className="text-red-500">*</span></p>
+                        <p>Email:<span className="text-red-500">*</span></p>
                         <Input
                             required
                             type="email"
@@ -64,7 +64,7 @@ export default function RegisterPage() {
                         />
                     </Label>
                     <Label className="flex flex-col items-start gap-2">
-                        <p>Address :<span className="text-red-500">*</span></p>
+                        <p>Address:<span className="text-red-500">*</span></p>
                         <textarea
                             required
                             value={address}
@@ -73,7 +73,7 @@ export default function RegisterPage() {
                         />
                     </Label>
                     <Label className="flex flex-col items-start gap-2">
-                        <p>TVA rate :<span className="text-red-500">*</span></p>
+                        <p>TVA rate:<span className="text-red-500">*</span></p>
                         <Input step={0.1} min={0} max={1}
                             type="number"
                             placeholder="0.20"
@@ -84,7 +84,7 @@ export default function RegisterPage() {
                         />
                     </Label>
                     <Label className="flex flex-col items-start gap-2">
-                        <p>Hourly rate :<span className="text-red-500">*</span></p>
+                        <p>Hourly rate:<span className="text-red-500">*</span></p>
                         <Input
                             type="number"
                             value={hourlyRate}
@@ -97,7 +97,7 @@ export default function RegisterPage() {
                             className="w-full p-3 border rounded-md shadow-sm focus:ring-2 focus:ring-blue-500" />
                     </Label>
                     <Label className="flex flex-col items-start gap-2">
-                        <p>URL ICAL :</p>
+                        <p>URL ICAL:</p>
                         <Input
                             type="text"
                             value={urlICAL}

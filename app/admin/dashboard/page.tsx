@@ -65,11 +65,11 @@ export default function ProfilPage() {
         <h2 className="text-xl font-semibold mb-4">Informations about the user : {session?.user?.name}</h2>
         <div className="space-y-2">
           <div className="flex gap-5">
-            <span className="font-medium">Nom :</span>
+            <span className="font-medium">Name:</span>
             <span>{session?.user?.name ?? "Utilisateur"}</span>
           </div>
           <div className="flex gap-5">
-            <span className="font-medium whitespace-nowrap">Email :</span>
+            <span className="font-medium whitespace-nowrap">Email:</span>
             <span className="overflow-hidden text-ellipsis whitespace-nowrap">{session?.user?.email}</span>
           </div>
         </div>
@@ -105,15 +105,15 @@ export default function ProfilPage() {
               />
             </div>
             <div className="flex gap-5">
-              <span className="font-medium">Nom :</span>
+              <span className="font-medium">Name:</span>
               <span>{client.name}</span>
             </div>
             <div className="flex gap-5">
-              <span className="font-medium">Email :</span>
+              <span className="font-medium">Email:</span>
               <span>{client.email}</span>
             </div>
             <div className="flex gap-5">
-              <span className="font-medium">Address :</span>
+              <span className="font-medium">Address:</span>
               <span>{client.address}</span>
             </div>
             <Link

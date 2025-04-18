@@ -42,7 +42,7 @@ export default function RegisterPage() {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <Label className="flex flex-col items-start gap-2">
-            <p>Last Name :<span className="text-red-500">*</span> </p>
+            <p>Last Name:<span className="text-red-500">*</span> </p>
             <Input
               type="text"
               value={lastname}
@@ -52,7 +52,7 @@ export default function RegisterPage() {
             />
           </Label>
           <Label className="flex flex-col items-start gap-2">
-            <p>First Name :<span className="text-red-500">*</span></p>
+            <p>First Name:<span className="text-red-500">*</span></p>
             <Input
               type="text"
               value={firstname}
@@ -62,7 +62,7 @@ export default function RegisterPage() {
             />
           </Label>
           <Label className="flex flex-col items-start gap-2">
-            <p>Company number :<span className="text-red-500">*</span></p>
+            <p>Company number:<span className="text-red-500">*</span></p>
             <Input
               type="text"
               placeholder="SIRET/CRN/EIN/BCE..."
@@ -73,7 +73,7 @@ export default function RegisterPage() {
             />
           </Label>
           <Label className="flex flex-col items-start gap-2">
-            <p>Email :<span className="text-red-500">*</span></p>
+            <p>Email:<span className="text-red-500">*</span></p>
             <Input
               type="email"
               placeholder="example@gmail.com"
@@ -84,7 +84,7 @@ export default function RegisterPage() {
             />
           </Label>
           <Label className="flex flex-col items-start gap-2">
-            <p>Password :<span className="text-red-500">*</span></p>
+            <p>Password:<span className="text-red-500">*</span></p>
             <Input
               type="password"
               value={password}

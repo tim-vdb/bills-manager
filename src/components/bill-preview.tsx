@@ -58,8 +58,12 @@ export default function BillPreview({
   paymentTerms,
 
 }: BillPreviewProps) {
+  const date = new Date();
+
   return (
     <div className="space-y-20 p-8">
+
+      <p>Date : {date.toLocaleDateString()}</p>
       <div className="flex items-start gap-10 flex-col sm:flex-row">
         <div className="flex flex-col gap-5 w-full">
           <h2 className="font-medium underline">User informations</h2>
@@ -148,14 +152,3 @@ export default function BillPreview({
     </div>
   )
 }
-
-
-{/* // <div key={index} className="border p-3 rounded flex justify-between items-center">
-//                 <h2 className="font-semibold">{event.summary}</h2>
-//                 <button
-//                   className="text-sm text-blue-500"
-//                   onClick={() => toggleItem(index)}
-//                 >
-//                   Afficher
-//                 </button>
-//               </div> */}

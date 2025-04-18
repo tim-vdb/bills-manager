@@ -111,7 +111,7 @@ export default function PageClient({ initialUrl, billClientId, initialClient, in
 
                     <div className="flex flex-col gap-6 lg:gap-0 lg:flex-row items-center justify-between px-5 py-5 sm:sticky top-0 z-999">
                         <Label className="flex flex-col sm:flex-row items-center text-white font-medium">
-                            <p>Paste your ICAL URL :</p>
+                            <p>Paste your ICAL URL:</p>
                             <Input
                                 type="text"
                                 value={url}
@@ -120,7 +120,7 @@ export default function PageClient({ initialUrl, billClientId, initialClient, in
                             />
                         </Label>
                         <Label className="flex flex-col sm:flex-row items-center font-medium">
-                            <p className="text-white">Select a period :</p>
+                            <p className="text-white">Select a period:</p>
                             <DatePickerWithRange setDateFrom={setDateFrom} setDateTo={setDateTo} />
                         </Label>
                     </div>
