@@ -88,7 +88,7 @@ export default function PageClient({ initialUrl, billClientId, initialClient, in
     return (
         <div className="space-y-6 relative w-full">
             {!showPreview && (
-                <div className="flex flex-col gap-6 lg:gap-0 lg:flex-row items-center justify-between bg-slate-900 px-5 py-5 sticky top-0">
+                <div className="flex flex-col gap-6 lg:gap-0 lg:flex-row items-center justify-between bg-slate-900 px-5 py-5 sticky top-0 z-999">
                     <Label className="flex items-center text-white font-medium">
                         <p>Paste your ICAL URL :</p>
                         <Input

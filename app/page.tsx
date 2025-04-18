@@ -1,27 +1,24 @@
 import { Prisma } from "@/generated/prisma";
 import { Button, buttonVariants } from "@/src/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/src/components/ui/card";
-import { Input } from "@/src/components/ui/input";
-// import { prisma } from "@/src/lib/prisma";
 import Image from "next/image";
 import Link from "next/link";
 
 export default async function Home() {
 
   return (
-    <div>
-      <Card>
+    <div className="flex items-center w-full h-screen overflow-hidden">
+      <Card className="mx-auto w-2/3">
         <CardHeader>
-          <CardTitle>Bills Manager</CardTitle>
-          <Link href='/admin/auth/register'>
-            <Button>S'inscrire</Button>
-          </Link>
-          <Link href='/admin/auth/login'>
-            <Button>Se connecter</Button>
-          </Link>
+          <CardTitle>
+            <h1 className="text-5xl text-center">Bills Manager</h1>
+          </CardTitle>
         </CardHeader>
         <CardContent>
-          Bills manager
+          <h2 className="text-center">Don't Waste your time !</h2>
+          <Link href={"/register"}>
+            Discover the app !
+          </Link>
         </CardContent>
       </Card>
     </div>

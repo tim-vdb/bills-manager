@@ -53,15 +53,15 @@ export default function BillPreview({
 
 }: BillPreviewProps) {
   return (
-    <div className="space-y-6 p-6">
-      <div className="flex items-start">
-        <div className="flex flex-col gap-5 w-full">
+    <div className="space-y-20 p-8">
+      <div className="flex items-start justify-between border-b border-b-slate-900">
+        <div className="flex flex-col gap-5">
           <p className="whitespace-nowrap">Last Name : {lastName}</p>
           <p className="whitespace-nowrap">First Name : {firstName}</p>
           <p className="whitespace-nowrap">Email : {email}</p>
           <p className="whitespace-nowrap">Company Number : {companyNumber}</p>
         </div>
-        <div className="flex flex-col gap-5 w-full text-right">
+        <div className="flex flex-col gap-5 text-right">
           <p>Name : {clientName}</p>
           <p>Email : {clientEmail}</p>
           <p>Address : {clientAddress}</p>
@@ -70,7 +70,7 @@ export default function BillPreview({
           <p>Invoice Reference : {reference}</p>
         </div>
       </div>
-      <div className="space-y-6 p-6">
+      <div>
         {icalData && Array.isArray(icalData.events) && (
           <Table className="w-full">
             <TableCaption>List of ICAL Events</TableCaption>

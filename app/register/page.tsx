@@ -24,7 +24,7 @@ export default function RegisterPage() {
     })
 
     if (res.ok) {
-      router.push("/admin/auth/login")
+      router.push("/login")
     } else {
       alert("Inscription échouée")
     }
@@ -84,7 +84,7 @@ export default function RegisterPage() {
             S'inscrire
           </Button>
         </form>
-        <Link href={"/admin/auth/login"}>Login</Link>
+        <Link href={"/login"}>Login</Link>
       </Card>
     </div>
   )

@@ -26,7 +26,7 @@ export default function RegisterPage() {
         })
 
         if (res.ok) {
-            router.push("/admin/dashboard/profil")
+            router.push("/admin/dashboard")
         } else {
             alert("error company when added")
         }

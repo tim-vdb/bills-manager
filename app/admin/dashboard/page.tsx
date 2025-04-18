@@ -15,7 +15,7 @@ export default function ProfilPage() {
 
   useEffect(() => {
     if (status === "unauthenticated") {
-      router.push("/admin/auth/login")
+      router.push("/login")
     }
   }, [status, router])
 
@@ -63,7 +63,7 @@ export default function ProfilPage() {
         <div className="mt-6 text-center col-span-full">
           <Button
             variant="destructive"
-            onClick={() => signOut({ callbackUrl: "/admin/auth/login" })}
+            onClick={() => signOut({ callbackUrl: "/login" })}
             className="w-full"
           >
             Se déconnecter
@@ -76,7 +76,7 @@ export default function ProfilPage() {
           <div>
             <Link href={"/admin/dashboard/company"} className="flex items-center w-fit py-3 px-6 text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-300 rounded-lg text-center">
               <p>New Client</p>
-              <ion-icon size="large" name="add-outline"></ion-icon>
+              {/* <ion-icon size="large" name="add-outline"></ion-icon> */}
             </Link>
           </div>
         </Card>
