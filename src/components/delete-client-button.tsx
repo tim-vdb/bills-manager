@@ -2,16 +2,19 @@ import { deleteClientAction } from "@/app/api/user.action"
 import { Button } from "./ui/button"
 import toast from "react-hot-toast"
 
-export default function DeleteClientButton(props: {
+export default function DeleteClientButton({
+    id,
+    onDeleteSuccess,
+}: {
     id: string
-    onDeleteSuccess: (deletedId: string) => void
+    onDeleteSuccess: (id: string) => void
 }) {
     const onDelete = async () => {
-        const result = await deleteClientAction(props.id)
+        const result = await deleteClientAction(id)
 
         if (result.message) {
             toast.success("Client deleted successfully")
-            props.onDeleteSuccess(props.id)
+            onDeleteSuccess(id)
         } else if (result.error) {
             toast.error(result.error || "Something went wrong.")
         }

@@ -126,10 +126,8 @@ export default async function Page({
 
     return (
         <PageClient
-            initialUrl={client.url_ICAL}
             initialClient={client}
             initialUser={user}
-            billClientId={bill_clientId}
         />
     )
 }

@@ -35,20 +35,18 @@ model User {
 }
 
 model Client {
-  client_id     String    @id @default(cuid())
+  client_id     String       @id @default(cuid())
   name          String
-  email         String    @unique
+  email         String       @unique
   address       String
-  status        String
-  hourly_rate   Float     @default(0)
-  tva_rate      Float     @default(0)
-  url_ICAL      String    @default("")
-  date_creation DateTime  @default(now())
-  date_update   DateTime? @updatedAt
-
-  ICALs       ICAL[]
-  bills       Bill[]
-  userClients UserClient[]
+  hourly_rate   Float        @default(0)
+  tva_rate      Float        @default(0)
+  url_ICAL      String       @default("")
+  date_creation DateTime     @default(now())
+  date_update   DateTime?    @updatedAt
+  ICALs         ICAL[]
+  bills         Bill[]
+  userClients   UserClient[]
 }
 
 model ICAL {

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 
 export default function RefreshClients() {
-    const [clients, setClients] = useState<any[]>([])
+    const [clients, setClients] = useState<Client[]>([])
     const router = useRouter()
 
     useEffect(() => {

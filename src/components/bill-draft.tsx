@@ -1,28 +1,21 @@
-import { Client, User } from "@/generated/prisma"
 import {
     Table,
     TableBody,
     TableCaption,
     TableCell,
-    TableFooter,
     TableHead,
     TableHeader,
     TableRow,
 } from "@/src/components/ui/table"
 import { Input } from "./ui/input"
-import { useState } from "react"
 import { Label } from "./ui/label"
 import { Textarea } from "./ui/textarea"
+import { IcalData, IcalEvent } from "@/types/ical"
 
 type BillDraftProps = {
-    url: string
-    icalData: any
+    icalData: IcalData | null
     openStates: Record<number, boolean>
     toggleItem: (index: number) => void
-    setDateFrom: React.Dispatch<React.SetStateAction<Date>>
-    setDateTo: React.Dispatch<React.SetStateAction<Date>>
-    initialClient: Client
-    initialUser: User
     lastName: string
     setLastName: React.Dispatch<React.SetStateAction<string>>
     firstName: string
@@ -55,14 +48,9 @@ type BillDraftProps = {
 
 
 export default function BillDraft({
-    url,
     icalData,
     openStates,
     toggleItem,
-    setDateFrom,
-    setDateTo,
-    initialClient,
-    initialUser,
     lastName,
     setLastName,
     firstName,
@@ -223,7 +211,7 @@ export default function BillDraft({
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            {icalData.events.map((event: any, index: number) => (
+                            {icalData.events.map((event: IcalEvent, index: number) => (
                                 <TableRow key={index}>
                                     <TableCell className="text-right">
                                         <button

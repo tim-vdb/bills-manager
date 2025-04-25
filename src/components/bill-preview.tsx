@@ -1,24 +1,19 @@
 "use client"
 
-import { Client, User } from "@/generated/prisma"
 import {
   Table,
   TableBody,
   TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/src/components/ui/table"
+import { IcalData, IcalEvent } from "@/types/ical"
 
 type BillPreviewProps = {
-  url: string
-  icalData: any
+  icalData: IcalData | null
   openStates: Record<number, boolean>
-  toggleItem: (index: number) => void
-  initialClient: Client
-  initialUser: User
   lastName: string
   firstName: string
   email: string
@@ -36,12 +31,8 @@ type BillPreviewProps = {
 }
 
 export default function BillPreview({
-  url,
   icalData,
   openStates,
-  toggleItem,
-  initialClient,
-  initialUser,
   lastName,
   firstName,
   email,
@@ -96,7 +87,7 @@ export default function BillPreview({
               </TableRow>
             </TableHeader>
             <TableBody>
-              {icalData.events.map((event: any, index: number) =>
+              {icalData.events.map((event: IcalEvent, index: number) =>
                 !openStates[index] ? (
                   <TableRow key={index}>
                     <TableCell className="flex flex-col font-medium">
@@ -146,7 +137,7 @@ export default function BillPreview({
           <div className="h-16 border-b border-gray-400 w-64 mt-2"></div>
         </div>
         <p className="text-xs text-gray-500 mt-1">
-        Cette facture a été générée automatiquement. Pour toute question, merci de nous contacter à l'adresse : <strong>contact@yourcompany.com</strong>
+        Cette facture a été générée automatiquement. Pour toute question, merci de nous contacter à l&apos;adresse : <strong>contact@yourcompany.com</strong>
         </p>
       </div>
     </div>

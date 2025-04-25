@@ -1,5 +1,4 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/src/components/ui/card";
-import Image from "next/image";
 import Link from "next/link";
 
 export default async function Home() {
@@ -13,7 +12,7 @@ export default async function Home() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <h2 className="text-center">Don't Waste your time !</h2>
+          <h2 className="text-center">Don&apos;t Waste Your Time!</h2>
           <Link href={"/register"} className="flex items-center gap-4 px-8 shadowBlue border-2 border-blue-400 mx-auto duration-200 w-fit shadowBlue py-3 rounded-lg">
             Discover the app !
           </Link>

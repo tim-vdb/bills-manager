@@ -28,22 +28,22 @@ export function DatePickerWithRange({
     const [date, setDate] = React.useState<DateRange | undefined>({
         from: new Date(),
         to: addDays(new Date(), 30),
-    })
+    });
 
-    const handleSaveDates = () => {
+    const handleSaveDates = React.useCallback(() => {
         if (!date?.from || !date?.to) {
             alert("Sélectionnez une plage de dates complète.")
             return
         }
         setDateFrom(date.from)
         setDateTo(date.to)
-    }
+    }, [date, setDateFrom, setDateTo]);
 
     React.useEffect(() => {
         if (date?.from && date?.to) {
             handleSaveDates()
         }
-    }, [date])
+    }, [date, handleSaveDates]);
 
     return (
         <div className={cn("grid gap-2", className)}>

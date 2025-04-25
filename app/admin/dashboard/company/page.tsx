@@ -17,14 +17,13 @@ export default function RegisterPage() {
     const [tvaRate, setTvaRate] = useState(0.2)
     const [urlICAL, setUrlICAL] = useState("")
     const [hourlyRate, setHourlyRate] = useState<number | ''>('')
-    const [status, setStatus] = useState("")
     const router = useRouter()
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         const res = await fetch("/api/company", {
             method: "POST",
-            body: JSON.stringify({ "name": name, "email": email, "address": address, "status": status, tvaRate: tvaRate, urlICAL: urlICAL, hourlyRate: hourlyRate }),
+            body: JSON.stringify({ "name": name, "email": email, "address": address, tvaRate: tvaRate, urlICAL: urlICAL, hourlyRate: hourlyRate }),
         })
 
         const data = await res.json()

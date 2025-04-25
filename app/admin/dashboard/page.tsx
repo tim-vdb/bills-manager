@@ -12,8 +12,8 @@ import toast from "react-hot-toast"
 export default function ProfilPage() {
   const { data: session, status } = useSession()
   const router = useRouter()
-  const [clients, setClients] = useState<any[]>([])
-  const [visibleClients, setVisibleClients] = useState(clients);
+  const [clients, setClients] = useState<Client[]>([])
+  const [visibleClients, setVisibleClients] = useState<Client[]>(clients);
   const handleDeleteSuccess = (deletedId: string) => {
     setVisibleClients(prev => prev.filter(client => client.client_id !== deletedId));
   };
@@ -53,7 +53,7 @@ export default function ProfilPage() {
   if (!session) return null
 
   const handleLogout = async () => {
-    const res = await signOut({ redirect: false, callbackUrl: "/login" })
+    await signOut({ redirect: false, callbackUrl: "/login" })
 
     toast.success("Logged out successfully!")
     router.push("/login")

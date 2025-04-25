@@ -39,13 +39,11 @@ model Client {
     name          String
     email         String    @unique
     address       String
-    status        String
     hourly_rate   Float     @default(0)
     tva_rate      Float     @default(0)
     url_ICAL      String    @default("")
     date_creation DateTime  @default(now())
     date_update   DateTime? @updatedAt
-
     ICALs       ICAL[]  
     bills       Bill[]
     userClients UserClient[]

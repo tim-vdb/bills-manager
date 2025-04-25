@@ -2764,7 +2764,6 @@ export namespace Prisma {
     name: string | null
     email: string | null
     address: string | null
-    status: string | null
     hourly_rate: number | null
     tva_rate: number | null
     url_ICAL: string | null
@@ -2777,7 +2776,6 @@ export namespace Prisma {
     name: string | null
     email: string | null
     address: string | null
-    status: string | null
     hourly_rate: number | null
     tva_rate: number | null
     url_ICAL: string | null
@@ -2790,7 +2788,6 @@ export namespace Prisma {
     name: number
     email: number
     address: number
-    status: number
     hourly_rate: number
     tva_rate: number
     url_ICAL: number
@@ -2815,7 +2812,6 @@ export namespace Prisma {
     name?: true
     email?: true
     address?: true
-    status?: true
     hourly_rate?: true
     tva_rate?: true
     url_ICAL?: true
@@ -2828,7 +2824,6 @@ export namespace Prisma {
     name?: true
     email?: true
     address?: true
-    status?: true
     hourly_rate?: true
     tva_rate?: true
     url_ICAL?: true
@@ -2841,7 +2836,6 @@ export namespace Prisma {
     name?: true
     email?: true
     address?: true
-    status?: true
     hourly_rate?: true
     tva_rate?: true
     url_ICAL?: true
@@ -2941,7 +2935,6 @@ export namespace Prisma {
     name: string
     email: string
     address: string
-    status: string
     hourly_rate: number
     tva_rate: number
     url_ICAL: string
@@ -2973,7 +2966,6 @@ export namespace Prisma {
     name?: boolean
     email?: boolean
     address?: boolean
-    status?: boolean
     hourly_rate?: boolean
     tva_rate?: boolean
     url_ICAL?: boolean
@@ -2990,7 +2982,6 @@ export namespace Prisma {
     name?: boolean
     email?: boolean
     address?: boolean
-    status?: boolean
     hourly_rate?: boolean
     tva_rate?: boolean
     url_ICAL?: boolean
@@ -3003,7 +2994,6 @@ export namespace Prisma {
     name?: boolean
     email?: boolean
     address?: boolean
-    status?: boolean
     hourly_rate?: boolean
     tva_rate?: boolean
     url_ICAL?: boolean
@@ -3016,7 +3006,6 @@ export namespace Prisma {
     name?: boolean
     email?: boolean
     address?: boolean
-    status?: boolean
     hourly_rate?: boolean
     tva_rate?: boolean
     url_ICAL?: boolean
@@ -3024,7 +3013,7 @@ export namespace Prisma {
     date_update?: boolean
   }
 
-  export type ClientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"client_id" | "name" | "email" | "address" | "status" | "hourly_rate" | "tva_rate" | "url_ICAL" | "date_creation" | "date_update", ExtArgs["result"]["client"]>
+  export type ClientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"client_id" | "name" | "email" | "address" | "hourly_rate" | "tva_rate" | "url_ICAL" | "date_creation" | "date_update", ExtArgs["result"]["client"]>
   export type ClientInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ICALs?: boolean | Client$ICALsArgs<ExtArgs>
     bills?: boolean | Client$billsArgs<ExtArgs>
@@ -3046,7 +3035,6 @@ export namespace Prisma {
       name: string
       email: string
       address: string
-      status: string
       hourly_rate: number
       tva_rate: number
       url_ICAL: string
@@ -3482,7 +3470,6 @@ export namespace Prisma {
     readonly name: FieldRef<"Client", 'String'>
     readonly email: FieldRef<"Client", 'String'>
     readonly address: FieldRef<"Client", 'String'>
-    readonly status: FieldRef<"Client", 'String'>
     readonly hourly_rate: FieldRef<"Client", 'Float'>
     readonly tva_rate: FieldRef<"Client", 'Float'>
     readonly url_ICAL: FieldRef<"Client", 'String'>
@@ -9387,7 +9374,6 @@ export namespace Prisma {
     name: 'name',
     email: 'email',
     address: 'address',
-    status: 'status',
     hourly_rate: 'hourly_rate',
     tva_rate: 'tva_rate',
     url_ICAL: 'url_ICAL',
@@ -9586,7 +9572,6 @@ export namespace Prisma {
     name?: StringFilter<"Client"> | string
     email?: StringFilter<"Client"> | string
     address?: StringFilter<"Client"> | string
-    status?: StringFilter<"Client"> | string
     hourly_rate?: FloatFilter<"Client"> | number
     tva_rate?: FloatFilter<"Client"> | number
     url_ICAL?: StringFilter<"Client"> | string
@@ -9602,7 +9587,6 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     address?: SortOrder
-    status?: SortOrder
     hourly_rate?: SortOrder
     tva_rate?: SortOrder
     url_ICAL?: SortOrder
@@ -9621,7 +9605,6 @@ export namespace Prisma {
     NOT?: ClientWhereInput | ClientWhereInput[]
     name?: StringFilter<"Client"> | string
     address?: StringFilter<"Client"> | string
-    status?: StringFilter<"Client"> | string
     hourly_rate?: FloatFilter<"Client"> | number
     tva_rate?: FloatFilter<"Client"> | number
     url_ICAL?: StringFilter<"Client"> | string
@@ -9637,7 +9620,6 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     address?: SortOrder
-    status?: SortOrder
     hourly_rate?: SortOrder
     tva_rate?: SortOrder
     url_ICAL?: SortOrder
@@ -9658,7 +9640,6 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"Client"> | string
     email?: StringWithAggregatesFilter<"Client"> | string
     address?: StringWithAggregatesFilter<"Client"> | string
-    status?: StringWithAggregatesFilter<"Client"> | string
     hourly_rate?: FloatWithAggregatesFilter<"Client"> | number
     tva_rate?: FloatWithAggregatesFilter<"Client"> | number
     url_ICAL?: StringWithAggregatesFilter<"Client"> | string
@@ -10041,7 +10022,6 @@ export namespace Prisma {
     name: string
     email: string
     address: string
-    status: string
     hourly_rate?: number
     tva_rate?: number
     url_ICAL?: string
@@ -10057,7 +10037,6 @@ export namespace Prisma {
     name: string
     email: string
     address: string
-    status: string
     hourly_rate?: number
     tva_rate?: number
     url_ICAL?: string
@@ -10073,7 +10052,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
     hourly_rate?: FloatFieldUpdateOperationsInput | number
     tva_rate?: FloatFieldUpdateOperationsInput | number
     url_ICAL?: StringFieldUpdateOperationsInput | string
@@ -10089,7 +10067,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
     hourly_rate?: FloatFieldUpdateOperationsInput | number
     tva_rate?: FloatFieldUpdateOperationsInput | number
     url_ICAL?: StringFieldUpdateOperationsInput | string
@@ -10105,7 +10082,6 @@ export namespace Prisma {
     name: string
     email: string
     address: string
-    status: string
     hourly_rate?: number
     tva_rate?: number
     url_ICAL?: string
@@ -10118,7 +10094,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
     hourly_rate?: FloatFieldUpdateOperationsInput | number
     tva_rate?: FloatFieldUpdateOperationsInput | number
     url_ICAL?: StringFieldUpdateOperationsInput | string
@@ -10131,7 +10106,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
     hourly_rate?: FloatFieldUpdateOperationsInput | number
     tva_rate?: FloatFieldUpdateOperationsInput | number
     url_ICAL?: StringFieldUpdateOperationsInput | string
@@ -10561,7 +10535,6 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     address?: SortOrder
-    status?: SortOrder
     hourly_rate?: SortOrder
     tva_rate?: SortOrder
     url_ICAL?: SortOrder
@@ -10579,7 +10552,6 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     address?: SortOrder
-    status?: SortOrder
     hourly_rate?: SortOrder
     tva_rate?: SortOrder
     url_ICAL?: SortOrder
@@ -10592,7 +10564,6 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     address?: SortOrder
-    status?: SortOrder
     hourly_rate?: SortOrder
     tva_rate?: SortOrder
     url_ICAL?: SortOrder
@@ -11800,7 +11771,6 @@ export namespace Prisma {
     name: string
     email: string
     address: string
-    status: string
     hourly_rate?: number
     tva_rate?: number
     url_ICAL?: string
@@ -11815,7 +11785,6 @@ export namespace Prisma {
     name: string
     email: string
     address: string
-    status: string
     hourly_rate?: number
     tva_rate?: number
     url_ICAL?: string
@@ -11863,7 +11832,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
     hourly_rate?: FloatFieldUpdateOperationsInput | number
     tva_rate?: FloatFieldUpdateOperationsInput | number
     url_ICAL?: StringFieldUpdateOperationsInput | string
@@ -11878,7 +11846,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
     hourly_rate?: FloatFieldUpdateOperationsInput | number
     tva_rate?: FloatFieldUpdateOperationsInput | number
     url_ICAL?: StringFieldUpdateOperationsInput | string
@@ -12018,7 +11985,6 @@ export namespace Prisma {
     name: string
     email: string
     address: string
-    status: string
     hourly_rate?: number
     tva_rate?: number
     url_ICAL?: string
@@ -12033,7 +11999,6 @@ export namespace Prisma {
     name: string
     email: string
     address: string
-    status: string
     hourly_rate?: number
     tva_rate?: number
     url_ICAL?: string
@@ -12095,7 +12060,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
     hourly_rate?: FloatFieldUpdateOperationsInput | number
     tva_rate?: FloatFieldUpdateOperationsInput | number
     url_ICAL?: StringFieldUpdateOperationsInput | string
@@ -12110,7 +12074,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
     hourly_rate?: FloatFieldUpdateOperationsInput | number
     tva_rate?: FloatFieldUpdateOperationsInput | number
     url_ICAL?: StringFieldUpdateOperationsInput | string
@@ -12193,7 +12156,6 @@ export namespace Prisma {
     name: string
     email: string
     address: string
-    status: string
     hourly_rate?: number
     tva_rate?: number
     url_ICAL?: string
@@ -12208,7 +12170,6 @@ export namespace Prisma {
     name: string
     email: string
     address: string
-    status: string
     hourly_rate?: number
     tva_rate?: number
     url_ICAL?: string
@@ -12276,7 +12237,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
     hourly_rate?: FloatFieldUpdateOperationsInput | number
     tva_rate?: FloatFieldUpdateOperationsInput | number
     url_ICAL?: StringFieldUpdateOperationsInput | string
@@ -12291,7 +12251,6 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
     hourly_rate?: FloatFieldUpdateOperationsInput | number
     tva_rate?: FloatFieldUpdateOperationsInput | number
     url_ICAL?: StringFieldUpdateOperationsInput | string

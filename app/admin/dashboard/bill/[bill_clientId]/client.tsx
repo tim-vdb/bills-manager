@@ -1,6 +1,7 @@
 // app/bill/[bill_clientId]/client.tsx
 "use client"
 
+import { useEffect, useRef, useState, useTransition } from "react"
 import { icalFetchAction } from "@/app/api/ical/icalActions"
 import { Client, User } from "@/generated/prisma"
 import BillDraft from "@/src/components/bill-draft"
@@ -11,17 +12,16 @@ import { Input } from "@/src/components/ui/input"
 import { Label } from "@/src/components/ui/label"
 import { debounce } from "lodash"
 import Link from "next/link"
-import { useCallback, useEffect, useState, useTransition } from "react"
+import Image from "next/image"
+import { IcalData } from "@/types/ical"
 
 type Props = {
-    initialUrl: string
-    initialClient: Client
     initialUser: User
-    billClientId: string
+    initialClient: Client
 }
 
-export default function PageClient({ initialUrl, billClientId, initialClient, initialUser }: Props) {
-    const [icalData, setIcalData] = useState<any>(null)
+export default function PageClient({ initialClient, initialUser }: Props) {
+    const [icalData, setIcalData] = useState<IcalData | null>(null)
     const [isPending, startTransition] = useTransition()
     const [showPreview, setShowPreview] = useState(false)
     const [totalAmount, setTotalAmount] = useState(0)
@@ -54,17 +54,28 @@ export default function PageClient({ initialUrl, billClientId, initialClient, in
     const [url, setUrl] = useState(initialClient.url_ICAL)
     const [reference, setReference] = useState("XXXXXXXXXX")
 
+    const debouncedFetchRef = useRef<((url: string) => void) | null>(null)
 
-    const fetchData = useCallback(
-        debounce((newUrl: string) => {
+    useEffect(() => {
+        const fn = debounce((newUrl: string) => {
             if (!dateFrom || !dateTo) return
             startTransition(async () => {
                 const result = await icalFetchAction(newUrl, dateFrom, dateTo)
                 setIcalData(result)
             })
-        }, 600),
-        [dateFrom, dateTo]
-    )
+        }, 600)
+
+        debouncedFetchRef.current = fn
+
+        // Clean up to avoid memory leaks
+        return () => fn.cancel()
+    }, [dateFrom, dateTo, url])
+
+    const fetchData = (url: string) => {
+        if (debouncedFetchRef.current) {
+            debouncedFetchRef.current(url)
+        }
+    }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newUrl = e.target.value
@@ -72,8 +83,15 @@ export default function PageClient({ initialUrl, billClientId, initialClient, in
         fetchData(newUrl)
     }
 
+    type EventType = {
+        summary: string;
+        description: string;
+        location: string;
+        totalHours: number;
+    };
+
     useEffect(() => {
-        const resultAmount = icalData?.events?.reduce((acc: number, event: any, index: number) => {
+        const resultAmount = icalData?.events?.reduce((acc: number, event: EventType, index: number) => {
             if (!openStates[index]) {
                 return acc + (event.totalHours * hourlyRate)
             }
@@ -87,7 +105,7 @@ export default function PageClient({ initialUrl, billClientId, initialClient, in
 
     useEffect(() => {
         if (url) fetchData(url)
-    }, [dateFrom, dateTo])
+    }, [dateFrom, dateTo, url])
 
     const printNow = () => {
         window.print()
@@ -128,16 +146,12 @@ export default function PageClient({ initialUrl, billClientId, initialClient, in
             )}
             <h1 className="text-6xl text-center font-medium my-10">Invoice</h1>
 
-            {isPending && <div className="w-full flex items-center justify-center"><img className='flex items-center animate-spin w-5' src="/icons/spinner.svg" /></div>}
+            {isPending && <div className="w-full flex items-center justify-center"><Image width={120} height={120} className='flex items-center animate-spin w-5' alt="Icon loader" src="/icons/spinner.svg" /></div>}
 
             {showPreview ? (
                 <BillPreview
-                    url={url}
                     icalData={icalData}
                     openStates={openStates}
-                    toggleItem={toggleItem}
-                    initialClient={initialClient}
-                    initialUser={initialUser}
                     lastName={lastName}
                     firstName={firstName}
                     email={email}
@@ -155,14 +169,9 @@ export default function PageClient({ initialUrl, billClientId, initialClient, in
                 />
             ) : (
                 <BillDraft
-                    url={url}
                     icalData={icalData}
                     openStates={openStates}
                     toggleItem={toggleItem}
-                    setDateFrom={setDateFrom}
-                    setDateTo={setDateTo}
-                    initialClient={initialClient}
-                    initialUser={initialUser}
                     lastName={lastName}
                     setLastName={setLastName}
                     firstName={firstName}
