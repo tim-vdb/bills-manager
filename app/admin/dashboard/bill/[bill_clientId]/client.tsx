@@ -98,7 +98,6 @@ export default function PageClient({ initialClient, initialUser }: Props) {
             return acc
         }, 0) || 0
 
-        console.log('Calculating total with hourlyRate:', hourlyRate)
         setTotalAmount(resultAmount)
     }, [icalData, openStates, hourlyRate])
 

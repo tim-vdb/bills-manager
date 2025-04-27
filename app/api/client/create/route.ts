@@ -13,7 +13,6 @@ export async function POST(req: Request) {
 
   try {
     const { name, email, address, tvaRate, urlICAL, hourlyRate } = await req.json();
-    console.log("REÇU DU FRONT:", { name, email, address, tvaRate, urlICAL, hourlyRate });
 
     const client = await createClient({
       name, 
