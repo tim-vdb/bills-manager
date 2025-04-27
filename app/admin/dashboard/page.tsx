@@ -33,7 +33,7 @@ export default function ProfilPage() {
   useEffect(() => {
     const fetchClients = async () => {
       try {
-        const res = await fetch("/api/company/list")
+        const res = await fetch("/api/client/getAllClient")
         const data = await res.json()
         if (res.ok) {
           setClients(data)

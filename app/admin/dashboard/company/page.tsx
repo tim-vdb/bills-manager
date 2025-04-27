@@ -21,7 +21,7 @@ export default function RegisterPage() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
-        const res = await fetch("/api/company", {
+        const res = await fetch("/api/client/create", {
             method: "POST",
             body: JSON.stringify({ "name": name, "email": email, "address": address, tvaRate: tvaRate, urlICAL: urlICAL, hourlyRate: hourlyRate }),
         })

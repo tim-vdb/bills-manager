@@ -2,7 +2,6 @@
 "use client"
 
 import { useEffect, useRef, useState, useTransition } from "react"
-import { icalFetchAction } from "@/app/api/ical/icalActions"
 import { Client, User } from "@/generated/prisma"
 import BillDraft from "@/src/components/bill-draft"
 import BillPreview from "@/src/components/bill-preview"
@@ -14,6 +13,7 @@ import { debounce } from "lodash"
 import Link from "next/link"
 import Image from "next/image"
 import { IcalData } from "@/types/ical"
+import { getDataIcal } from "@/src/lib/getDataIcal"
 
 type Props = {
     initialUser: User
@@ -60,7 +60,7 @@ export default function PageClient({ initialClient, initialUser }: Props) {
         const fn = debounce((newUrl: string) => {
             if (!dateFrom || !dateTo) return
             startTransition(async () => {
-                const result = await icalFetchAction(newUrl, dateFrom, dateTo)
+                const result = await getDataIcal(newUrl, dateFrom, dateTo)
                 setIcalData(result)
             })
         }, 600)

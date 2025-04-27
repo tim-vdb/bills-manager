@@ -1,5 +1,5 @@
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import SessionWrapper from '@/src/components/SessionWrapper'
+import { authOptions } from '@/src/lib/auth'
 import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
 import React, { PropsWithChildren } from 'react'

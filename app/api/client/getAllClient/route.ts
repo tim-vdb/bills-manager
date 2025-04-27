@@ -1,9 +1,8 @@
+// api/company/list/route.ts
 import { NextResponse } from "next/server"
-import { PrismaClient } from "@/generated/prisma"
 import { getServerSession } from "next-auth"
-import { authOptions } from "../../auth/[...nextauth]/route";
-
-const prisma = new PrismaClient()
+import { authOptions } from "@/src/lib/auth";
+import { getClientByUserId } from "@/src/lib/client/getClientByUserId";
 
 export async function GET() {
     const session = await getServerSession(authOptions);
@@ -15,19 +14,7 @@ export async function GET() {
     const userId = session.user?.id || session.user?.sub
 
     try {
-        const userClients = await prisma.userClient.findMany({
-            where: { id: userId },
-            include: {
-                client: true,
-            },
-            orderBy: {
-                client: {
-                    date_creation: "desc",
-                },
-            },
-        })
-
-        const clients = userClients.map(uc => uc.client)
+        const clients = await getClientByUserId(userId);
 
         return NextResponse.json(clients)
     } catch (err) {

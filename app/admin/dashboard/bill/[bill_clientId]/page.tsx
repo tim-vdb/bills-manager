@@ -1,10 +1,12 @@
-// "use client"
+"use server"
 
-import { getClientById } from "@/app/api/getClientById/route"
+
 import PageClient from "./client"
 import { getServerSession } from "next-auth"
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"
-import { PrismaClient } from "@/generated/prisma"
+import { authOptions } from "@/src/lib/auth"
+import { getClientById } from "@/src/lib/client/getClientById"
+import { prisma } from "@/src/lib/prisma"
+
 
 // import { icalFetchAction } from "@/app/api/ical/icalActions"
 // import BillDraft from "@/src/components/bill-draft"
@@ -99,13 +101,12 @@ import { PrismaClient } from "@/generated/prisma"
 
 // app/bill/[bill_clientId]/page.tsx
 
-const prisma = new PrismaClient()
-
 export default async function Page({
-    params,
+    params: paramsPromise,
 }: {
-    params: { bill_clientId: string }
+    params: Promise<{ bill_clientId: string }>
 }) {
+    const params = await paramsPromise
     const bill_clientId = params.bill_clientId
 
     const client = await getClientById(bill_clientId)
