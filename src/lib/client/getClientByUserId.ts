@@ -1,4 +1,4 @@
-// lib/getClientByUserId.ts
+// lib/client/getClientByUserId.ts
 import { prisma } from "@/src/lib/prisma";
 
 export async function getClientByUserId(userId: string | undefined) {

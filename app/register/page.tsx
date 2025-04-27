@@ -29,7 +29,7 @@ export default function RegisterPage() {
 
     if (res.ok) {
       toast.success("You are registered !")
-      router.push("/login")
+      router.push("/admin/dashboard")
     } else {
       toast.error(data.error || "Something went wrong.")
     }

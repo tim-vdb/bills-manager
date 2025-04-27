@@ -1,4 +1,4 @@
-// lib/createClient.ts
+// lib/client/createClient.ts
 import { prisma } from "@/src/lib/prisma";
 
 export async function createClient({ name, email, address, tvaRate, urlICAL, hourlyRate, userId }: {

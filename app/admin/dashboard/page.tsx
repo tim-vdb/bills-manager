@@ -8,6 +8,7 @@ import { Card } from "@/src/components/ui/card"
 import Link from "next/link"
 import DeleteClientButton from "@/src/components/delete-client-button"
 import toast from "react-hot-toast"
+import DeleteUserButton from "@/src/components/delete-user-button"
 
 export default function ProfilPage() {
   const { data: session, status } = useSession()
@@ -62,7 +63,10 @@ export default function ProfilPage() {
   return (
     <div className="flex flex-col sm:flex-row gap-2 relative p-2 sm:p-0">
       <Card className="p-4 shadow-md rounded-md bg-gray-50 w-full sm:w-1/3 sm:h-screen sm:sticky top-0">
-        <h2 className="text-xl font-semibold mb-4">Informations about the user : {session?.user?.name}</h2>
+        <div className="flex justify-between items-center">
+          <h2 className="text-xl font-semibold mb-4">Informations about the user : {session?.user?.name}</h2>
+          <DeleteUserButton />
+        </div>
         <div className="space-y-2">
           <div className="flex gap-5">
             <span className="font-medium">Name:</span>

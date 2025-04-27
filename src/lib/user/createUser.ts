@@ -1,4 +1,4 @@
-// lib/createUser.ts
+// lib/user/createUser.ts
 import { prisma } from "@/src/lib/prisma";
 import { hash } from "bcryptjs";
 
