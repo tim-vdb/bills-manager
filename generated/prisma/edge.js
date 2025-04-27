@@ -177,7 +177,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "E:\\Projet\\projet-react\\bills-manager\\generated\\prisma",
+      "value": "C:\\Users\\timot\\OneDrive\\Documents\\Projet\\bills-manager\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -188,10 +188,14 @@ const config = {
         "fromEnvVar": null,
         "value": "windows",
         "native": true
+      },
+      {
+        "fromEnvVar": null,
+        "value": "rhel-openssl-3.0.x"
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "E:\\Projet\\projet-react\\bills-manager\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\timot\\OneDrive\\Documents\\Projet\\bills-manager\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -205,16 +209,17 @@ const config = {
     "db"
   ],
   "activeProvider": "sqlite",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "file:./dev.db"
+        "value": null
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"sqlite\"\n  url      = env(\"DATABASE_URL\")\n}\n\n// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\nmodel User {\n  id               String   @id @default(cuid())\n  last_name        String\n  first_name       String\n  company_number   String\n  email            String   @unique\n  password         String\n  date_inscription DateTime @default(now())\n  date_update      DateTime @updatedAt\n\n  modules     Module[]\n  bills       Bill[]\n  userClients UserClient[]\n  // emailVerified Boolean? @default(false)\n  // image         String?\n  // createdAt     DateTime?\n  // updatedAt     DateTime?\n\n  @@map(\"user\")\n}\n\nmodel Client {\n  client_id     String       @id @default(cuid())\n  name          String\n  email         String       @unique\n  address       String\n  hourly_rate   Float        @default(0)\n  tva_rate      Float        @default(0)\n  url_ICAL      String       @default(\"\")\n  date_creation DateTime     @default(now())\n  date_update   DateTime?    @updatedAt\n  ICALs         ICAL[]\n  bills         Bill[]\n  userClients   UserClient[]\n}\n\nmodel ICAL {\n  ical_id    String    @id @default(cuid())\n  url        String\n  date_start DateTime?\n  date_end   DateTime?\n\n  client    Client @relation(fields: [client_id], references: [client_id], onDelete: Cascade)\n  client_id String\n\n  icalModules ICALModule[]\n}\n\nmodel Module {\n  module_id  String @id @default(cuid())\n  name       String\n  unit_price Int\n  duration   String\n\n  user User   @relation(fields: [id], references: [id])\n  id   String\n\n  icalModules ICALModule[]\n}\n\nmodel Bill {\n  bill_id       String    @id @default(cuid())\n  date_creation DateTime  @default(now())\n  date_update   DateTime? @updatedAt\n  date_echeance DateTime\n  tva           Int?\n  status        String\n\n  client    Client @relation(fields: [client_id], references: [client_id], onDelete: Cascade)\n  client_id String\n\n  user User   @relation(fields: [id], references: [id])\n  id   String\n}\n\nmodel UserClient {\n  id        String\n  client_id String\n\n  user   User   @relation(fields: [id], references: [id])\n  client Client @relation(fields: [client_id], references: [client_id], onDelete: Cascade)\n\n  @@id([id, client_id])\n}\n\nmodel ICALModule {\n  ical_id   String\n  module_id String\n\n  ical   ICAL   @relation(fields: [ical_id], references: [ical_id])\n  module Module @relation(fields: [module_id], references: [module_id])\n\n  @@id([ical_id, module_id])\n}\n",
-  "inlineSchemaHash": "3e7c687cfb890472fd7beade20cbde74a372c2964c40e760605d0ca1e054f1d8",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider      = \"prisma-client-js\"\n  binaryTargets = [\"native\", \"rhel-openssl-3.0.x\"]\n  output        = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"sqlite\"\n  url      = env(\"DATABASE_URL\")\n}\n\n// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\nmodel User {\n  id               String   @id @default(cuid())\n  last_name        String\n  first_name       String\n  company_number   String\n  email            String   @unique\n  password         String\n  date_inscription DateTime @default(now())\n  date_update      DateTime @updatedAt\n\n  modules     Module[]\n  bills       Bill[]\n  userClients UserClient[]\n  // emailVerified Boolean? @default(false)\n  // image         String?\n  // createdAt     DateTime?\n  // updatedAt     DateTime?\n\n  @@map(\"user\")\n}\n\nmodel Client {\n  client_id     String       @id @default(cuid())\n  name          String\n  email         String       @unique\n  address       String\n  hourly_rate   Float        @default(0)\n  tva_rate      Float        @default(0)\n  url_ICAL      String       @default(\"\")\n  date_creation DateTime     @default(now())\n  date_update   DateTime?    @updatedAt\n  ICALs         ICAL[]\n  bills         Bill[]\n  userClients   UserClient[]\n}\n\nmodel ICAL {\n  ical_id    String    @id @default(cuid())\n  url        String\n  date_start DateTime?\n  date_end   DateTime?\n\n  client    Client @relation(fields: [client_id], references: [client_id], onDelete: Cascade)\n  client_id String\n\n  icalModules ICALModule[]\n}\n\nmodel Module {\n  module_id  String @id @default(cuid())\n  name       String\n  unit_price Int\n  duration   String\n\n  user User   @relation(fields: [id], references: [id])\n  id   String\n\n  icalModules ICALModule[]\n}\n\nmodel Bill {\n  bill_id       String    @id @default(cuid())\n  date_creation DateTime  @default(now())\n  date_update   DateTime? @updatedAt\n  date_echeance DateTime\n  tva           Int?\n  status        String\n\n  client    Client @relation(fields: [client_id], references: [client_id], onDelete: Cascade)\n  client_id String\n\n  user User   @relation(fields: [id], references: [id])\n  id   String\n}\n\nmodel UserClient {\n  id        String\n  client_id String\n\n  user   User   @relation(fields: [id], references: [id])\n  client Client @relation(fields: [client_id], references: [client_id], onDelete: Cascade)\n\n  @@id([id, client_id])\n}\n\nmodel ICALModule {\n  ical_id   String\n  module_id String\n\n  ical   ICAL   @relation(fields: [ical_id], references: [ical_id])\n  module Module @relation(fields: [module_id], references: [module_id])\n\n  @@id([ical_id, module_id])\n}\n",
+  "inlineSchemaHash": "1299c7ed3f9f234c2e30a374a2c2c45d48ffe4484fd6d5c95d3a80be4a3e4a71",
   "copyEngine": true
 }
 config.dirname = '/'
