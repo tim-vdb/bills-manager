@@ -29,7 +29,7 @@ export default function LoginPage() {
       toast.success("Successfully logged in!")
       router.push("/admin/dashboard")
     } else {
-      toast.error(res?.error || "Invalid credentials.")
+      toast.error(res?.error || "Invalid credentials. Are you registered ?")
     }
   }
 
