@@ -64,7 +64,7 @@ export default function ProfilPage() {
     <div className="flex flex-col sm:flex-row gap-2 relative p-2 sm:p-0">
       <Card className="p-4 shadow-md rounded-md bg-gray-50 w-full sm:w-1/3 sm:h-screen sm:sticky top-0">
         <div className="flex justify-between items-center">
-          <h2 className="text-xl font-semibold mb-4">Informations about the user : {session?.user?.name}</h2>
+          <h2 className="text-xl font-semibold mb-4">User information: {session?.user?.name}</h2>
           <DeleteUserButton />
         </div>
         <div className="space-y-2">
@@ -101,7 +101,7 @@ export default function ProfilPage() {
           <Card key={client.client_id} className="p-4">
             <div className="flex justify-between">
               <h2 className="text-xl font-semibold mb-4">
-                Informations about the customer : {client.name}
+              Customer information: {client.name}
               </h2>
               <DeleteClientButton
                 id={client.client_id}

@@ -69,8 +69,6 @@ export default function BillPreview({
           <p className="whitespace-nowrap">Name: {clientName}</p>
           <p className="whitespace-nowrap">Email: {clientEmail}</p>
           <p className="whitespace-nowrap">Address: {clientAddress}</p>
-          <p className="whitespace-nowrap">Hourly Rate: {hourlyRate}</p>
-          <p className="whitespace-nowrap">TVA Rate: {tvaRate}</p>
           <p className="whitespace-nowrap">Invoice Reference: {reference}</p>
         </div>
       </div>
