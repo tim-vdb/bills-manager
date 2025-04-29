@@ -54,24 +54,24 @@ export default function BillPreview({
   return (
     <div className="space-y-20 p-8">
 
-      <p>Date : {date.toLocaleDateString()}</p>
+      <p>Date: {date.toLocaleDateString()}</p>
       <div className="flex items-start gap-10 flex-col sm:flex-row">
         <div className="flex flex-col gap-5 w-full">
           <h2 className="font-medium underline">User informations</h2>
-          <p className="whitespace-nowrap">Last Name : {lastName}</p>
-          <p className="whitespace-nowrap">First Name : {firstName}</p>
-          <p className="whitespace-nowrap">Email : {email}</p>
-          <p className="whitespace-nowrap">Company Number : {companyNumber}</p>
+          <p className="whitespace-nowrap">Last Name: {lastName}</p>
+          <p className="whitespace-nowrap">First Name: {firstName}</p>
+          <p className="whitespace-nowrap">Email: {email}</p>
+          <p className="whitespace-nowrap">Company Number: {companyNumber}</p>
         </div>
         <div className="w-full border-2 border-b-slate-900 sm:hidden"></div>
         <div className="flex flex-col gap-5 sm:text-right">
           <h2 className="font-medium underline">Company informations</h2>
-          <p className="whitespace-nowrap">Name : {clientName}</p>
-          <p className="whitespace-nowrap">Email : {clientEmail}</p>
-          <p className="whitespace-nowrap">Address : {clientAddress}</p>
-          <p className="whitespace-nowrap">Hourly Rate : {hourlyRate}</p>
-          <p className="whitespace-nowrap">TVA Rate : {tvaRate}</p>
-          <p className="whitespace-nowrap">Invoice Reference : {reference}</p>
+          <p className="whitespace-nowrap">Name: {clientName}</p>
+          <p className="whitespace-nowrap">Email: {clientEmail}</p>
+          <p className="whitespace-nowrap">Address: {clientAddress}</p>
+          <p className="whitespace-nowrap">Hourly Rate: {hourlyRate}</p>
+          <p className="whitespace-nowrap">TVA Rate: {tvaRate}</p>
+          <p className="whitespace-nowrap">Invoice Reference: {reference}</p>
         </div>
       </div>
       <div>
@@ -124,8 +124,8 @@ export default function BillPreview({
         {(IBAN || BIC) && (
           <div className="text-sm mt-2">
             <p>Payment method: <strong>Bank transfer</strong></p>
-            {IBAN && <p>IBAN : <strong>{IBAN}</strong></p>}
-            {BIC && <p>BIC : <strong>{BIC}</strong></p>}
+            {IBAN && <p>IBAN: <strong>{IBAN}</strong></p>}
+            {BIC && <p>BIC: <strong>{BIC}</strong></p>}
           </div>
         )}
         <p className="text-xs text-gray-500 mt-6">

@@ -87,7 +87,7 @@ export default function BillDraft({
                 <div className="flex flex-col gap-5 w-full">
                     <h2 className="font-medium underline">User informations</h2>
                     <Label className="flex flex-col justify-between items-start">
-                        <p className="whitespace-nowrap">Last Name :</p>
+                        <p className="whitespace-nowrap">Last Name:</p>
                         <Input
                             type="text"
                             value={lastName}
@@ -95,7 +95,7 @@ export default function BillDraft({
                         />
                     </Label>
                     <Label className="flex flex-col justify-between items-start">
-                        <p className="whitespace-nowrap">First Name :</p>
+                        <p className="whitespace-nowrap">First Name:</p>
                         <Input
                             type="text"
                             value={firstName}
@@ -103,7 +103,7 @@ export default function BillDraft({
                         />
                     </Label>
                     <Label className="flex flex-col justify-between items-start">
-                        <p className="whitespace-nowrap">Email :</p>
+                        <p className="whitespace-nowrap">Email:</p>
                         <Input
                             type="email"
                             placeholder="example@gmail.com"
@@ -112,7 +112,7 @@ export default function BillDraft({
                         />
                     </Label>
                     <Label className="flex flex-col justify-between items-start">
-                        <p className="whitespace-nowrap">Company Number :</p>
+                        <p className="whitespace-nowrap">Company Number:</p>
                         <Input
                             placeholder="SIRET/CRN/EIN/BCE..."
                             type="text"
@@ -121,7 +121,7 @@ export default function BillDraft({
                         />
                     </Label>
                     <Label className="flex flex-col justify-between items-start">
-                        <p className="whitespace-nowrap">IBAN :</p>
+                        <p className="whitespace-nowrap">IBAN:</p>
                         <Input
                             type="text"
                             value={IBAN}
@@ -129,7 +129,7 @@ export default function BillDraft({
                         />
                     </Label>
                     <Label className="flex flex-col justify-between items-start">
-                        <p className="whitespace-nowrap">BIC :</p>
+                        <p className="whitespace-nowrap">BIC:</p>
                         <Input
                             type="text"
                             value={BIC}
@@ -137,7 +137,7 @@ export default function BillDraft({
                         />
                     </Label>
                     <Label className="flex flex-col justify-between items-start">
-                        <p className="whitespace-nowrap">Payment Terms :</p>
+                        <p className="whitespace-nowrap">Payment Terms:</p>
                         <Input
                             type="text"
                             placeholder="ex: 15 days"
@@ -150,14 +150,14 @@ export default function BillDraft({
                 <div className="flex flex-col gap-5 w-full">
                     <h2 className="font-medium underline">Company informations</h2>
                     <Label className="flex flex-col justify-between items-start">
-                        <p>Name :</p>
+                        <p>Name:</p>
                         <Input
                             value={clientName}
                             onChange={(e) => setClientName(e.target.value)} // Met à jour la valeur de clientName
                         />
                     </Label>
                     <Label className="flex flex-col justify-between items-start">
-                        <p>Email :</p>
+                        <p>Email:</p>
                         <Input
                             placeholder="example@gmail.com"
                             value={clientEmail}
@@ -165,14 +165,14 @@ export default function BillDraft({
                         />
                     </Label>
                     <Label className="flex flex-col justify-between items-start">
-                        <p>Address :</p>
+                        <p>Address:</p>
                         <Textarea
                             value={clientAddress}
                             onChange={(e) => setClientAddress(e.target.value)} 
                         />
                     </Label>
                     <Label className="flex flex-col justify-between items-start">
-                        <p>Hourly Rate :</p>
+                        <p>Hourly Rate:</p>
                         <Input type="number"
                             value={hourlyRate}
                             min={0}
@@ -180,14 +180,14 @@ export default function BillDraft({
                         />
                     </Label>
                     <Label className="flex flex-col justify-between items-start">
-                        <p>TVA Rate :</p>
+                        <p>TVA Rate:</p>
                         <Input type="number" min={0} step={0.1} max={1}
                             value={tvaRate}
                             onChange={(e) => setTvaRate(Number(e.target.value))} // Met à jour la valeur de tvaRate
                         />
                     </Label>
                     <Label className="flex flex-col justify-between items-start">
-                        <p>Invoice Reference :</p>
+                        <p>Invoice Reference:</p>
                         <Input type="text"
                             value={reference}
                             onChange={(e) => setReference(e.target.value)} // Met à jour la valeur de tvaRate

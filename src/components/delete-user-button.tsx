@@ -37,7 +37,7 @@ export default function DeleteUserButton() {
             variant="destructive"
             className="w-fit hover:cursor-pointer bg-red-400"
         >
-            Delete customer
+            Delete my account
         </Button>
     );
 }
